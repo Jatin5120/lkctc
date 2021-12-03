@@ -25,6 +25,8 @@ const Color kCaptionColorDark = Color(0xFFBBBBBB);
 
 const Color kWhiteColor = Color(0xFFFFFFFF);
 
+const Color kTransparentColor = Color(0x00000000);
+
 const Color kHintTextColor = Color(0xFF999999);
 
 const Color kSuccessColor = Color(0xFF2DD37A);

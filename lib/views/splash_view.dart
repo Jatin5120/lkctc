@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lkctc_student_app/authentication/authentication.dart';
 import '../constants/constants.dart';
 import '../controllers/controllers.dart';
 
@@ -13,6 +14,7 @@ class SplashView extends StatefulWidget {
 class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
   static final ThemeController _themeController = Get.find();
   static final SplashController _splashController = Get.find();
+  static final AuthenticationController _authenticationController = Get.find();
 
   late AnimationController _animationController;
   late Animation<double> _nameAnimation;
@@ -42,6 +44,9 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
     _splashController.bottom = size.height.fivePercent;
     _splashController.logoOpacity = 1;
     _splashController.logoPosition = size.width.thirtyPercent;
+
+    await Future.delayed(kSplashDuration);
+    _authenticationController.isLoaded = true;
   }
 
   @override

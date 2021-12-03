@@ -121,7 +121,7 @@ class Button extends StatelessWidget {
   static ThemeController themeController = Get.find();
 
   final String label;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   ///It takes an `enum` `ButtonSize`, which will determine the size of the button,
   ///
