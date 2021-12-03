@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1099153231132",
+    "project_id": "lkctc-student",
+    "storage_bucket": "lkctc-student.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1099153231132:android:9cc93e75f0a178a2b9bed9",
+        "android_client_info": {
+          "package_name": "com.example.lkctc_student_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1099153231132-dajslsajd2543391fibcj5s5a6nudkhe.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.lkctc_student_app",
+            "certificate_hash": "7c63edfd8291cb925dd0c063f6a5fb0ec6a2bab2"
+          }
+        },
+        {
+          "client_id": "1099153231132-4gdlu4qa5o68v6qch20v35a8uabhruk4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAAf7-zpzN3ht-8X7rK9AGlFOxC9qSdbM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1099153231132-4gdlu4qa5o68v6qch20v35a8uabhruk4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
