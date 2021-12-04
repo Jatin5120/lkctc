@@ -39,7 +39,7 @@ ThemeData kLightTheme = ThemeData(
     focusedBorder: const OutlineInputBorder(
       borderRadius: kMediumRadius,
       borderSide: BorderSide(
-        color: kTextColorDark,
+        color: kPrimaryColor,
         width: 2,
       ),
     ),

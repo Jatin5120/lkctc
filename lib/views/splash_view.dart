@@ -75,7 +75,9 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
                   child: Text(
                     kAppName,
                     style: TextStyle(
-                      color: kWhiteColor,
+                      color: _themeController.isDarkMode
+                          ? kWhiteColor
+                          : kPrimaryColor,
                       fontWeight: FontWeight.w700,
                       letterSpacing: 1.5,
                       fontSize: _splashController.fontSize,

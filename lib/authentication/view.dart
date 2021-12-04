@@ -52,7 +52,7 @@ class AuthenticationView extends GetWidget<AuthenticationController> {
                     child: const LKCTCLogo(),
                   ),
                   const SizedBox(height: 16),
-                  Text(
+                  Label.primary(
                     'Login as',
                     style: Get.textTheme.headline6,
                   ),
@@ -131,7 +131,7 @@ class _UserTypeCard extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(modal.label, style: Get.textTheme.headline5),
+                Label.primary(modal.label, style: Get.textTheme.headline5),
                 Image.asset(modal.imageUrl),
               ],
             ),

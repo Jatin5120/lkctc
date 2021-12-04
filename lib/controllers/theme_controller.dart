@@ -6,38 +6,41 @@ import 'package:get_storage/get_storage.dart';
 class ThemeController extends GetxController {
   static const String _themeModeKey = 'themeMode';
   final Rx<ThemeMode> _themeMode = Rx<ThemeMode>(ThemeMode.system);
+  final RxBool _isDarkMode = false.obs;
+  late GetStorage _storage;
+
+  bool get isDarkMode => _isDarkMode.value;
+  set isDarkMode(bool isDarkMode) => _isDarkMode.value = isDarkMode;
 
   ThemeMode get themeMode => _themeMode.value;
-
   set themeMode(ThemeMode themeMode) => _themeMode.value = themeMode;
-
-  late GetStorage _storage;
 
   @override
   void onInit() {
     super.onInit();
     _storage = GetStorage();
     themeMode = _readThemeMode();
+    ever(_themeMode, handleThemeMode);
   }
 
-  void changeTheme(ThemeMode theme) {
-    themeMode = theme;
-    Get.changeThemeMode(theme);
+  void handleThemeMode(ThemeMode mode) {
+    Get.changeThemeMode(mode);
     _writeThemeMode(themeMode);
-  }
 
-  bool get isDarkMode {
     switch (themeMode) {
       case ThemeMode.light:
-        return false;
+        isDarkMode = false;
+        break;
       case ThemeMode.dark:
-        return true;
+        isDarkMode = true;
+        break;
       case ThemeMode.system:
         Brightness brightness =
             SchedulerBinding.instance!.window.platformBrightness;
-        return brightness == Brightness.dark;
+        isDarkMode = brightness == Brightness.dark;
+        break;
       default:
-        return false;
+        isDarkMode = false;
     }
   }
 

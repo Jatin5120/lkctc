@@ -153,7 +153,7 @@ class _TestScreenState extends State<TestScreen> {
             padding: const EdgeInsets.all(8.0),
             child: FloatingActionButton.extended(
               onPressed: () {
-                themeController.changeTheme(ThemeMode.light);
+                themeController.themeMode = ThemeMode.light;
               },
               label: const Text('Light Theme'),
             ),
@@ -162,7 +162,7 @@ class _TestScreenState extends State<TestScreen> {
             padding: const EdgeInsets.all(8.0),
             child: FloatingActionButton.extended(
               onPressed: () {
-                themeController.changeTheme(ThemeMode.dark);
+                themeController.themeMode = ThemeMode.dark;
               },
               label: const Text('Dark Theme'),
             ),
@@ -171,7 +171,7 @@ class _TestScreenState extends State<TestScreen> {
             padding: const EdgeInsets.all(8.0),
             child: FloatingActionButton.extended(
               onPressed: () {
-                themeController.changeTheme(ThemeMode.system);
+                themeController.themeMode = ThemeMode.system;
               },
               label: const Text('System Theme'),
             ),

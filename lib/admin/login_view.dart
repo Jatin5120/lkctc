@@ -1,13 +1,58 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:lkctc_student_app/constants/constants.dart';
+import 'package:lkctc_student_app/widgets/widgets.dart';
 
 class AdminLoginView extends StatelessWidget {
   const AdminLoginView({Key? key}) : super(key: key);
 
+  static final TextEditingController _idController = TextEditingController();
+  static final TextEditingController _passwordController =
+      TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text('Admin Login'),
+    final Size size = MediaQuery.of(context).size;
+    return Scaffold(
+      body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: SizedBox(
+          height: size.height,
+          width: size.width,
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: size.width.tenPercent,
+              vertical: size.height.fivePercent,
+            ).copyWith(top: size.height.tenPercent),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: size.width.thirtyPercent,
+                  width: size.width.thirtyPercent,
+                  child: const LKCTCLogo(),
+                ),
+                const SizedBox(height: 48),
+                Label('Admin Login', style: Get.textTheme.headline6),
+                const SizedBox(height: 32),
+                InputField(
+                  label: 'Admin ID',
+                  controller: _idController,
+                ),
+                InputField(
+                  label: 'Admin Password',
+                  controller: _passwordController,
+                ),
+                const Spacer(),
+                Button(
+                  label: 'Login',
+                  buttonSize: ButtonSize.large,
+                  onTap: () {},
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
