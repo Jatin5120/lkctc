@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:get/get.dart';
-import 'package:lkctc_student_app/controllers/controllers.dart';
 import '../constants/constants.dart';
 import 'label.dart';
 
@@ -53,7 +50,7 @@ class InputField extends StatelessWidget {
         children: [
           if (!floatingLabel) ...[
             Padding(
-              padding: const EdgeInsets.only(left: 4.0),
+              padding: const EdgeInsets.only(left: 4.0, top: 8.0),
               child: InputLabel(label),
             ),
           ],

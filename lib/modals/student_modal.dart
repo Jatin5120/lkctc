@@ -1,14 +1,14 @@
 import 'dart:convert';
 
 class StudentModal {
-  String studentID;
-  String name;
-  String roll;
-  String course;
-  String department;
-  String semester;
+  final String studentID;
+  final String name;
+  final String roll;
+  final String course;
+  final String department;
+  final String semester;
 
-  StudentModal({
+  const StudentModal({
     required this.studentID,
     required this.name,
     required this.roll,

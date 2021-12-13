@@ -1,14 +1,14 @@
 import 'dart:convert';
 
 class EventModal {
-  String evendID;
-  String name;
-  String description;
-  int lastDate;
-  String registerationLink;
-  String submissionLink;
+  final String evendID;
+  final String name;
+  final String description;
+  final int lastDate;
+  final String registerationLink;
+  final String submissionLink;
 
-  EventModal({
+  const EventModal({
     required this.evendID,
     required this.name,
     required this.description,

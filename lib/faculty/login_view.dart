@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../routes/routes.dart';
 import '../constants/constants.dart';
 import '../widgets/widgets.dart';
+import 'faculty.dart';
 
-class StudentLoginView extends StatelessWidget {
-  const StudentLoginView({Key? key}) : super(key: key);
+class FacultyLoginView extends GetView<FacultyController> {
+  const FacultyLoginView({Key? key}) : super(key: key);
+
   static final TextEditingController _emailController = TextEditingController();
   static final TextEditingController _passwordController =
       TextEditingController();
@@ -33,21 +37,33 @@ class StudentLoginView extends StatelessWidget {
                   child: const LKCTCLogo(),
                 ),
                 const SizedBox(height: 48),
-                Label.primary('Student Login', style: Get.textTheme.headline6),
+                Label.primary('Faculty Login', style: Get.textTheme.headline6),
                 const SizedBox(height: 32),
                 InputField(
                   label: 'Email',
                   hint: 'Enter email',
                   controller: _emailController,
                 ),
-                InputField(
-                  label: 'Password',
-                  hint: 'Enter password',
-                  controller: _passwordController,
+                Obx(
+                  () => InputField(
+                    label: 'Password',
+                    hint: 'Enter password',
+                    controller: _passwordController,
+                    obscureText: controller.hidePassword,
+                    textInputAction: TextInputAction.done,
+                    suffixIcon: IconButton(
+                      icon: controller.hidePassword
+                          ? const Icon(Icons.visibility_rounded)
+                          : const Icon(Icons.visibility_off_outlined),
+                      onPressed: () {
+                        controller.hidePassword = !controller.hidePassword;
+                      },
+                    ),
+                  ),
                 ),
                 const Spacer(),
                 RegisterText(
-                  onTap: () {},
+                  onTap: () => Get.offNamed(FacultyRoutes.register),
                 ),
                 const SizedBox(height: 24),
                 Button(

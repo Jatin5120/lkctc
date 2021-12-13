@@ -1,15 +1,15 @@
 import 'dart:convert';
 
 class SubjectModal {
-  String subjectID;
-  String classID;
-  String facultyID;
-  String name;
-  String subjectCode;
-  String department;
-  int colorIndex;
+  final String subjectID;
+  final String classID;
+  final String facultyID;
+  final String name;
+  final String subjectCode;
+  final String department;
+  final int colorIndex;
 
-  SubjectModal({
+  const SubjectModal({
     required this.subjectID,
     required this.classID,
     required this.facultyID,

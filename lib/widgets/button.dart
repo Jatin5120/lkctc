@@ -38,7 +38,7 @@ class Button extends StatelessWidget {
     required this.onTap,
     this.buttonColor,
     this.labelColor,
-    this.buttonSize = ButtonSize.small,
+    this.buttonSize = ButtonSize.medium,
   })  : buttonType = ButtonType.primary,
         super(key: key);
 
@@ -76,7 +76,7 @@ class Button extends StatelessWidget {
     required this.onTap,
     this.labelColor,
     this.buttonColor,
-    this.buttonSize = ButtonSize.small,
+    this.buttonSize = ButtonSize.medium,
   })  : buttonType = ButtonType.secondary,
         super(key: key);
 
@@ -114,7 +114,7 @@ class Button extends StatelessWidget {
     required this.onTap,
     this.labelColor,
     this.buttonColor,
-    this.buttonSize = ButtonSize.small,
+    this.buttonSize = ButtonSize.medium,
   })  : buttonType = ButtonType.outlined,
         super(key: key);
 

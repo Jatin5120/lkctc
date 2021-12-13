@@ -3,15 +3,15 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 
 class AlumniModal {
-  String alumniID;
-  String name;
-  String imageUrl;
-  String email;
-  String phoneNo;
-  String job;
-  List<String> expertise;
+  final String alumniID;
+  final String name;
+  final String imageUrl;
+  final String email;
+  final String phoneNo;
+  final String job;
+  final List<String> expertise;
 
-  AlumniModal({
+  const AlumniModal({
     required this.alumniID,
     required this.name,
     required this.imageUrl,

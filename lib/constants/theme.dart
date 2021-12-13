@@ -20,6 +20,11 @@ ThemeData kLightTheme = ThemeData(
     elevation: kElevation,
     foregroundColor: kTextColorDark,
   ),
+  popupMenuTheme: const PopupMenuThemeData(
+    elevation: kElevation,
+    color: kCardColorLight,
+    shape: kSmallBorder,
+  ),
   shadowColor: kShadowColorLight,
   inputDecorationTheme: InputDecorationTheme(
     border: const OutlineInputBorder(
@@ -56,12 +61,19 @@ ThemeData kLightTheme = ThemeData(
     labelStyle: Get.textTheme.subtitle1!.copyWith(color: kTextColorLight),
     errorStyle: Get.textTheme.overline!.copyWith(color: kErrorColor),
   ),
-  dialogTheme: const DialogTheme(
+  dialogTheme: DialogTheme(
     backgroundColor: kCardColorLight,
     elevation: kElevation,
     shape: kMediumBorder,
+    titleTextStyle: Get.textTheme.headline6!.copyWith(color: kTextColorLight),
+    contentTextStyle:
+        Get.textTheme.subtitle2!.copyWith(color: kCaptionColorLight),
   ),
   iconTheme: const IconThemeData(color: kIconColorLight),
+  progressIndicatorTheme: const ProgressIndicatorThemeData(
+    color: kPrimaryColor,
+    refreshBackgroundColor: kSecondaryColorLight,
+  ),
 );
 
 ThemeData kDarkTheme = ThemeData(
@@ -80,6 +92,11 @@ ThemeData kDarkTheme = ThemeData(
     backgroundColor: kAccentColorDark,
     elevation: kElevation,
     foregroundColor: kTextColorDark,
+  ),
+  popupMenuTheme: const PopupMenuThemeData(
+    elevation: kElevation,
+    color: kCardColorDark,
+    shape: kSmallBorder,
   ),
   shadowColor: kShadowColorDark,
   inputDecorationTheme: InputDecorationTheme(
@@ -117,12 +134,19 @@ ThemeData kDarkTheme = ThemeData(
     labelStyle: Get.textTheme.subtitle1!.copyWith(color: kTextColorDark),
     errorStyle: Get.textTheme.overline!.copyWith(color: kErrorColor),
   ),
-  dialogTheme: const DialogTheme(
+  dialogTheme: DialogTheme(
     backgroundColor: kCardColorDark,
     elevation: kElevation,
     shape: kMediumBorder,
+    titleTextStyle: Get.textTheme.headline6!.copyWith(color: kTextColorDark),
+    contentTextStyle:
+        Get.textTheme.subtitle2!.copyWith(color: kCaptionColorDark),
   ),
   iconTheme: const IconThemeData(color: kIconColorDark),
+  progressIndicatorTheme: const ProgressIndicatorThemeData(
+    color: kWhiteColor,
+    refreshBackgroundColor: kSecondaryColorDark,
+  ),
 );
 
 TextTheme kTextTheme = TextTheme(

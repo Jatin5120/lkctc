@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lkctc_student_app/widgets/widgets.dart';
-import 'package:lkctc_student_app/constants/colors.dart';
 import 'package:lkctc_student_app/constants/constants.dart';
 import 'package:lkctc_student_app/controllers/controllers.dart';
 

@@ -15,3 +15,10 @@ enum UserType {
   faculty,
   student,
 }
+
+enum DialogType {
+  normal,
+  success,
+  warning,
+  error,
+}

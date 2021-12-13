@@ -3,15 +3,15 @@ import 'package:flutter/foundation.dart';
 import 'package:lkctc_student_app/modals/modals.dart';
 
 class ClassModal {
-  String classID;
-  String department;
-  String semester;
-  String name;
-  List<SubjectModal> subjects;
-  List<StudentModal> students;
-  List<StudentModal> classRepresentatives;
+  final String classID;
+  final String department;
+  final String semester;
+  final String name;
+  final List<SubjectModal> subjects;
+  final List<StudentModal> students;
+  final List<StudentModal> classRepresentatives;
 
-  ClassModal({
+  const ClassModal({
     required this.classID,
     required this.department,
     required this.semester,

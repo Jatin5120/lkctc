@@ -1,15 +1,15 @@
 import 'dart:convert';
 
 class PendingModal {
-  String userID;
-  String pendingID;
-  String name;
-  String email;
-  String phone;
-  String designation;
-  String department;
+  final String userID;
+  final String pendingID;
+  final String name;
+  final String email;
+  final String phone;
+  final String designation;
+  final String department;
 
-  PendingModal({
+  const PendingModal({
     required this.userID,
     required this.pendingID,
     required this.name,

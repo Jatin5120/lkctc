@@ -19,8 +19,8 @@ class ThemeController extends GetxController {
   void onInit() {
     super.onInit();
     _storage = GetStorage();
-    themeMode = _readThemeMode();
     ever(_themeMode, handleThemeMode);
+    themeMode = _readThemeMode();
   }
 
   void handleThemeMode(ThemeMode mode) {

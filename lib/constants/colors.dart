@@ -24,12 +24,14 @@ const Color kCaptionColorLight = Color(0xFF888888);
 const Color kCaptionColorDark = Color(0xFFBBBBBB);
 
 const Color kWhiteColor = Color(0xFFFFFFFF);
+const Color kBlackColor = Color(0xFF000000);
 
 const Color kTransparentColor = Color(0x00000000);
 
 const Color kHintTextColor = Color(0xFF999999);
 
 const Color kSuccessColor = Color(0xFF2DD37A);
+const Color kNormalColor = Color(0xFF2E85FF);
 const Color kWarningColor = Color(0xFFFFC257);
 const Color kErrorColor = Color(0xFFFF3127);
 

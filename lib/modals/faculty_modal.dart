@@ -1,16 +1,16 @@
 import 'dart:convert';
 
 class FacultyModal {
-  String userID;
-  String facultyID;
-  String name;
-  String email;
-  String phone;
-  String password;
-  String department;
-  String designation;
+  final String userID;
+  final String facultyID;
+  final String name;
+  final String email;
+  final String phone;
+  final String password;
+  final String department;
+  final String designation;
 
-  FacultyModal({
+  const FacultyModal({
     required this.userID,
     required this.facultyID,
     required this.name,

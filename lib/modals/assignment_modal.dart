@@ -1,16 +1,16 @@
 import 'dart:convert';
 
 class AssignmentModal {
-  String assignmentID;
-  String classID;
-  String subjectID;
-  String facultyID;
-  String title;
-  int lastDate;
-  String assignmentLink;
-  String submissionLink;
+  final String assignmentID;
+  final String classID;
+  final String subjectID;
+  final String facultyID;
+  final String title;
+  final int lastDate;
+  final String assignmentLink;
+  final String submissionLink;
 
-  AssignmentModal({
+  const AssignmentModal({
     required this.assignmentID,
     required this.classID,
     required this.subjectID,

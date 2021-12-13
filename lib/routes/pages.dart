@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 import 'package:lkctc_student_app/authentication/authentication.dart';
-import 'package:lkctc_student_app/admin/login_view.dart';
-import 'package:lkctc_student_app/student/login_view.dart';
-import 'package:lkctc_student_app/teacher/login_view.dart';
+import 'package:lkctc_student_app/admin/admin.dart';
+import 'package:lkctc_student_app/student/student.dart';
+import 'package:lkctc_student_app/faculty/faculty.dart';
 
 import '../views/views.dart';
 import 'routes.dart';
@@ -31,8 +31,14 @@ abstract class AppPages {
       page: () => const StudentLoginView(),
     ),
     GetPage(
-      name: TeacherRoutes.login,
-      page: () => const TeacherLoginView(),
+      name: FacultyRoutes.login,
+      page: () => const FacultyLoginView(),
+      binding: FacultuBinding(),
+    ),
+    GetPage(
+      name: FacultyRoutes.register,
+      page: () => const FacultyRegisterView(),
+      binding: FacultuBinding(),
     ),
   ];
 }

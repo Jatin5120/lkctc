@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lkctc_student_app/authentication/authentication.dart';
 
-import 'package:lkctc_student_app/constants/constants.dart';
-import 'package:lkctc_student_app/controllers/controllers.dart';
-import 'package:lkctc_student_app/routes/routes.dart';
-import 'package:lkctc_student_app/widgets/widgets.dart';
+import '../authentication/authentication.dart';
+import '../constants/constants.dart';
+import '../controllers/controllers.dart';
+import '../routes/routes.dart';
+import '../widgets/widgets.dart';
 
 class AuthenticationView extends GetWidget<AuthenticationController> {
   const AuthenticationView({Key? key}) : super(key: key);
@@ -17,9 +17,9 @@ class AuthenticationView extends GetWidget<AuthenticationController> {
       route: AdminRoutes.login,
     ),
     _UserTypeModal(
-      label: 'Teacher',
-      imageUrl: kIllustrationPath + 'teacher.png',
-      route: TeacherRoutes.login,
+      label: 'Faculty',
+      imageUrl: kIllustrationPath + 'faculty.png',
+      route: FacultyRoutes.login,
     ),
     _UserTypeModal(
       label: 'Student',

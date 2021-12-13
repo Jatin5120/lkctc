@@ -1,13 +1,13 @@
 import 'dart:convert';
 
 class NoticeModal {
-  String noticeID;
-  String title;
-  String description;
-  String imageUrl;
-  int date;
+  final String noticeID;
+  final String title;
+  final String description;
+  final String imageUrl;
+  final int date;
 
-  NoticeModal({
+  const NoticeModal({
     required this.noticeID,
     required this.title,
     required this.description,

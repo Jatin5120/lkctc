@@ -1,12 +1,12 @@
 import 'dart:convert';
 
 class AttendanceModal {
-  String attendanceID;
-  String classID;
-  String title;
-  String url;
+  final String attendanceID;
+  final String classID;
+  final String title;
+  final String url;
 
-  AttendanceModal({
+  const AttendanceModal({
     required this.attendanceID,
     required this.classID,
     required this.title,

@@ -16,6 +16,7 @@ class AdminLoginView extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
+        reverse: true,
         child: SizedBox(
           height: size.height,
           width: size.width,
@@ -33,14 +34,16 @@ class AdminLoginView extends StatelessWidget {
                   child: const LKCTCLogo(),
                 ),
                 const SizedBox(height: 48),
-                Label('Admin Login', style: Get.textTheme.headline6),
+                Label.primary('Admin Login', style: Get.textTheme.headline6),
                 const SizedBox(height: 32),
                 InputField(
                   label: 'Admin ID',
+                  hint: 'Enter admin id',
                   controller: _idController,
                 ),
                 InputField(
                   label: 'Admin Password',
+                  hint: 'Enter admin password',
                   controller: _passwordController,
                 ),
                 const Spacer(),
