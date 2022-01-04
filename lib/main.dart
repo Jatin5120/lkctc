@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -11,12 +12,13 @@ import 'package:lkctc_student_app/views/views.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp();
   await GetStorage.init();
-  await initializeControllers();
+  initializeControllers();
   runApp(const MyApp());
 }
 
-Future<void> initializeControllers() async {
+void initializeControllers() {
   Get.put(ThemeController());
   Get.put(NavBarController());
   Get.put(StorageController());

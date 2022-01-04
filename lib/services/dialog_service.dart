@@ -35,7 +35,7 @@ class DialogService {
               const CircularProgressIndicator(),
               if (message != null) ...[
                 const SizedBox(width: 16),
-                Text(message, style: Get.textTheme.headline6),
+                Text(message, style: Get.textTheme.subtitle1),
               ],
             ],
           ),
