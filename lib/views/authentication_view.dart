@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../authentication/authentication.dart';
 import '../constants/constants.dart';
 import '../controllers/controllers.dart';
 import '../routes/routes.dart';

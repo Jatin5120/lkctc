@@ -9,6 +9,7 @@ class FacultyModal {
   final String password;
   final String department;
   final String designation;
+  final bool isVerified;
 
   const FacultyModal({
     required this.userID,
@@ -19,6 +20,7 @@ class FacultyModal {
     required this.password,
     required this.department,
     required this.designation,
+    required this.isVerified,
   });
 
   FacultyModal copyWith({
@@ -30,6 +32,7 @@ class FacultyModal {
     String? password,
     String? department,
     String? designation,
+    bool? isVerified,
   }) {
     return FacultyModal(
       userID: userID ?? this.userID,
@@ -40,6 +43,7 @@ class FacultyModal {
       password: password ?? this.password,
       department: department ?? this.department,
       designation: designation ?? this.designation,
+      isVerified: isVerified ?? this.isVerified,
     );
   }
 
@@ -53,19 +57,35 @@ class FacultyModal {
       'password': password,
       'department': department,
       'designation': designation,
+      'isVerified': isVerified,
     };
+  }
+
+  factory FacultyModal.empty() {
+    return const FacultyModal(
+      userID: '',
+      facultyID: '',
+      name: '',
+      email: '',
+      phone: '',
+      password: '',
+      department: '',
+      designation: '',
+      isVerified: false,
+    );
   }
 
   factory FacultyModal.fromMap(Map<String, dynamic> map) {
     return FacultyModal(
-      userID: map['userID'],
-      facultyID: map['facultyID'],
-      name: map['name'],
-      email: map['email'],
-      phone: map['phone'],
-      password: map['password'],
-      department: map['department'],
-      designation: map['designation'],
+      userID: map['userID'] ?? '',
+      facultyID: map['facultyID'] ?? '',
+      name: map['name'] ?? '',
+      email: map['email'] ?? '',
+      phone: map['phone'] ?? '',
+      password: map['password'] ?? '',
+      department: map['department'] ?? '',
+      designation: map['designation'] ?? '',
+      isVerified: map['isVerified'] ?? false,
     );
   }
 
@@ -76,7 +96,7 @@ class FacultyModal {
 
   @override
   String toString() {
-    return 'FacultyModal(userID: $userID, facultyID: $facultyID, name: $name, email: $email, phone: $phone, password: $password, department: $department, designation: $designation)';
+    return 'FacultyModal(userID: $userID, facultyID: $facultyID, name: $name, email: $email, phone: $phone, password: $password, department: $department, designation: $designation, isVerified: $isVerified)';
   }
 
   @override
@@ -91,7 +111,8 @@ class FacultyModal {
         other.phone == phone &&
         other.password == password &&
         other.department == department &&
-        other.designation == designation;
+        other.designation == designation &&
+        other.isVerified == isVerified;
   }
 
   @override
@@ -103,6 +124,7 @@ class FacultyModal {
         phone.hashCode ^
         password.hashCode ^
         department.hashCode ^
-        designation.hashCode;
+        designation.hashCode ^
+        isVerified.hashCode;
   }
 }

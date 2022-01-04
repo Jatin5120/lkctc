@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lkctc_student_app/faculty/faculty.dart';
-import 'package:lkctc_student_app/faculty/service.dart';
-import 'package:lkctc_student_app/modals/modals.dart';
-import 'package:lkctc_student_app/routes/routes.dart';
-import '../constants/constants.dart';
-import '../widgets/widgets.dart';
+import '../faculty.dart';
 
 class FacultyRegisterView extends GetView<FacultyController> {
   const FacultyRegisterView({Key? key}) : super(key: key);
@@ -149,6 +144,7 @@ class FacultyRegisterView extends GetView<FacultyController> {
                         password: _passwordController.text,
                         department: _department,
                         designation: _designation,
+                        isVerified: false,
                       );
                       FacultyService.addFaculty(facultyModal);
                     }

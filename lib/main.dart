@@ -2,13 +2,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:lkctc_student_app/authentication/authentication.dart';
-import 'package:lkctc_student_app/constants/constants.dart';
-import 'package:lkctc_student_app/controllers/controllers.dart';
-import 'package:lkctc_student_app/my_screen.dart';
-import 'package:lkctc_student_app/routes/routes.dart';
-import 'package:lkctc_student_app/test_screen.dart';
-import 'package:lkctc_student_app/views/views.dart';
+
+import 'constants/constants.dart';
+import 'controllers/controllers.dart';
+import 'routes/routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,8 +38,6 @@ class MyApp extends StatelessWidget {
       themeMode: themeController.themeMode,
       initialRoute: AppPages.initialRoute,
       getPages: AppPages.pages,
-      // home: const AuthenticationView(),
-      // home: const SplashView(),
     );
   }
 }

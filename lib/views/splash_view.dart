@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lkctc_student_app/authentication/authentication.dart';
 import '../constants/constants.dart';
 import '../controllers/controllers.dart';
 

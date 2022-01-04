@@ -1,4 +1,10 @@
-export 'login_view.dart';
-export 'register_view.dart';
+export 'views/views.dart';
 export 'binding.dart';
 export 'controller.dart';
+export 'service.dart';
+export '../constants/constants.dart';
+export '../modals/modals.dart';
+export '../routes/routes.dart';
+export '../widgets/widgets.dart';
+export '../services/services.dart';
+export '../controllers/controllers.dart';

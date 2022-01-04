@@ -1,11 +1,10 @@
 import 'package:get/get.dart';
-import 'package:lkctc_student_app/authentication/authentication.dart';
-import 'package:lkctc_student_app/admin/admin.dart';
-import 'package:lkctc_student_app/student/student.dart';
-import 'package:lkctc_student_app/faculty/faculty.dart';
 
+import '../bindings/bindings.dart';
+import '../admin/admin.dart';
+import '../student/student.dart';
+import '../faculty/faculty.dart';
 import '../views/views.dart';
-import 'routes.dart';
 
 abstract class AppPages {
   const AppPages._();

@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../routes/routes.dart';
-import '../constants/constants.dart';
-import '../widgets/widgets.dart';
-import 'faculty.dart';
+import '../faculty.dart';
 
 class FacultyLoginView extends GetView<FacultyController> {
   const FacultyLoginView({Key? key}) : super(key: key);
@@ -69,7 +66,12 @@ class FacultyLoginView extends GetView<FacultyController> {
                 Button(
                   label: 'Login',
                   buttonSize: ButtonSize.large,
-                  onTap: () {},
+                  onTap: () {
+                    FacultyService.login(
+                      _emailController.text,
+                      _passwordController.text,
+                    );
+                  },
                 ),
               ],
             ),
