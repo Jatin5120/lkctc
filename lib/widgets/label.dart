@@ -6,26 +6,42 @@ import 'package:lkctc_student_app/controllers/controllers.dart';
 import 'tap_handler.dart';
 
 class Label extends GetWidget<ThemeController> {
-  const Label(this.label, {Key? key, this.style})
-      : _textColorLight = kTextColorLight,
+  const Label(
+    this.label, {
+    Key? key,
+    this.style,
+    this.lightColor,
+    this.darkColor,
+  })  : _textColorLight = lightColor ?? kTextColorLight,
+        _textColorDark = darkColor ?? kTextColorDark,
         super(key: key);
 
-  const Label.primary(this.label, {Key? key, this.style})
-      : _textColorLight = kPrimaryColor,
+  const Label.primary(
+    this.label, {
+    Key? key,
+    this.style,
+    this.lightColor,
+    this.darkColor,
+  })  : _textColorLight = lightColor ?? kPrimaryColor,
+        _textColorDark = darkColor ?? kTextColorDark,
         super(key: key);
 
   final String label;
   final TextStyle? style;
+  final Color? lightColor;
+  final Color? darkColor;
 
   final Color _textColorLight;
+  final Color _textColorDark;
 
   @override
   Widget build(BuildContext context) {
     return Text(
       label,
       style: style?.copyWith(
-        color: controller.isDarkMode ? kTextColorDark : _textColorLight,
+        color: controller.isDarkMode ? _textColorDark : _textColorLight,
       ),
+      softWrap: true,
     );
   }
 }

@@ -1,3 +1,5 @@
+import 'package:lkctc_student_app/constants/constants.dart';
+
 extension Percentage on double {
   double get onePercent => (this * 0.01).roundToDouble();
 
@@ -40,4 +42,41 @@ extension Percentage on double {
   double get ninetyPercent => (this * 0.9).roundToDouble();
 
   double get ninetyFivePercent => (this * 0.95).roundToDouble();
+}
+
+extension Type on String {
+  UserType get type {
+    switch (this) {
+      case 'admin':
+        return UserType.admin;
+      case 'faculty':
+        return UserType.faculty;
+      case 'student':
+        return UserType.student;
+      default:
+        return UserType.student;
+    }
+  }
+}
+
+extension TypeString on UserType {
+  String get type {
+    switch (this) {
+      case UserType.admin:
+        return 'admin';
+      case UserType.faculty:
+        return 'faculty';
+      case UserType.student:
+        return 'student';
+    }
+  }
+}
+
+extension FileName on DateTime {
+  String get fileName => toString()
+      .split('.')
+      .first
+      .replaceAll('-', '')
+      .replaceAll(':', '')
+      .replaceAll(' ', '_');
 }

@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:lkctc_student_app/faculty/faculty.dart';
+import 'package:lkctc_student_app/modals/modals.dart';
 
 class FacultyController extends GetxController {
   final RxBool _hidePassword = true.obs;

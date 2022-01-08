@@ -31,6 +31,9 @@ class DialogService {
           padding: const EdgeInsets.all(20.0),
           child: Row(
             mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: message == null
+                ? MainAxisAlignment.center
+                : MainAxisAlignment.start,
             children: [
               const CircularProgressIndicator(),
               if (message != null) ...[
@@ -64,12 +67,12 @@ class DialogService {
   /// ```dart
   /// DialogService.closeDialog()
   /// ```
-  static void showConfirmationDialog({
+  static Future<void> showConfirmationDialog({
     required String title,
     String? description,
     required List<Widget> actions,
-  }) {
-    Get.dialog(
+  }) async {
+    await Get.dialog(
       Dialog(
         child: Padding(
           padding: const EdgeInsets.all(12).copyWith(top: 32),
@@ -94,7 +97,7 @@ class DialogService {
               ],
               const SizedBox(height: 32),
               for (Widget action in actions) ...[
-                const SizedBox(height: 4),
+                const SizedBox(height: 8),
                 SizedBox(
                   width: double.maxFinite,
                   child: action,
@@ -127,7 +130,7 @@ class DialogService {
   static void showSuccessDialog({
     String title = 'Success',
     String message = 'Done',
-  }) {
+  }) async {
     Get.dialog(
       Dialog(
         child: Padding(
@@ -155,6 +158,9 @@ class DialogService {
       ),
       barrierDismissible: false,
     );
+    await Future.delayed(kDelayDuration);
+
+    closeDialog();
   }
 
   /// This method shows a [Error dialog] as an [Overlay] on the screen
@@ -287,9 +293,9 @@ class DialogService {
     );
   }
 
-  static void closeDialog() {
+  static void closeDialog<T>([T? result]) {
     if (Get.isDialogOpen!) {
-      Get.back();
+      Get.back(result: result);
     }
   }
 }

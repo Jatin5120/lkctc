@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:lkctc_student_app/admin/admin.dart';
 import 'package:lkctc_student_app/constants/constants.dart';
 import 'package:lkctc_student_app/widgets/widgets.dart';
 
-class AdminLoginView extends StatelessWidget {
+class AdminLoginView extends GetView<AdminController> {
   const AdminLoginView({Key? key}) : super(key: key);
 
   static final TextEditingController _idController = TextEditingController();
@@ -40,17 +42,47 @@ class AdminLoginView extends StatelessWidget {
                   label: 'Admin ID',
                   hint: 'Enter admin id',
                   controller: _idController,
+                  textCapitalization: TextCapitalization.none,
                 ),
-                InputField(
-                  label: 'Admin Password',
-                  hint: 'Enter admin password',
-                  controller: _passwordController,
+                Obx(
+                  () => InputField(
+                    label: 'Admin Password',
+                    hint: 'Enter admin password',
+                    controller: _passwordController,
+                    obscureText: controller.hidePassword,
+                    textInputAction: TextInputAction.done,
+                    textCapitalization: TextCapitalization.none,
+                    suffixIcon: IconButton(
+                      icon: controller.hidePassword
+                          ? const Icon(Icons.visibility_rounded)
+                          : const Icon(Icons.visibility_off_outlined),
+                      onPressed: () {
+                        controller.hidePassword = !controller.hidePassword;
+                      },
+                    ),
+                  ),
+                ),
+                Obx(
+                  () => Padding(
+                    padding: const EdgeInsets.only(top: 24),
+                    child: Text(
+                      controller.error,
+                      style: Get.textTheme.subtitle1!.copyWith(
+                        color: kErrorColor,
+                      ),
+                    ),
+                  ),
                 ),
                 const Spacer(),
                 Button(
                   label: 'Login',
                   buttonSize: ButtonSize.large,
-                  onTap: () {},
+                  onTap: () {
+                    AdminService.login(
+                      _idController.text,
+                      _passwordController.text,
+                    );
+                  },
                 ),
               ],
             ),

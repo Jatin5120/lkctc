@@ -1,12 +1,11 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import '../constants/constants.dart';
 
 class StorageController extends GetxController {
   final String _userTypeKey = 'userType';
   final String _isUserLoggedInKey = 'isUserLoggedIn';
 
-  late UserType userType;
+  late String userType;
   late bool isUserLoggedIn;
 
   final GetStorage _storage = GetStorage();
@@ -14,18 +13,25 @@ class StorageController extends GetxController {
   @override
   void onReady() {
     super.onReady();
-    userType = _readUserType();
-    isUserLoggedIn = _readUserLoggedIn();
+    _readUserType();
+    _readUserLoggedIn();
   }
 
-  bool _readUserLoggedIn() => _storage.read<bool>(_isUserLoggedInKey) ?? false;
+  void _readUserLoggedIn() {
+    isUserLoggedIn = _storage.read<bool>(_isUserLoggedInKey) ?? false;
+  }
 
-  Future<void> writeUserLoggedIn(bool loggedIn) async =>
-      await _storage.write(_isUserLoggedInKey, loggedIn);
+  Future<void> writeUserLoggedIn(bool loggedIn) async {
+    await _storage.write(_isUserLoggedInKey, loggedIn);
+    _readUserLoggedIn();
+  }
 
-  UserType _readUserType() =>
-      _storage.read<UserType>(_userTypeKey) ?? UserType.student;
+  void _readUserType() {
+    userType = _storage.read<String>(_userTypeKey) ?? '';
+  }
 
-  Future<void> writeUserType(UserType type) async =>
-      await _storage.write(_userTypeKey, type);
+  Future<void> writeUserType(String type) async {
+    await _storage.write(_userTypeKey, type);
+    _readUserType();
+  }
 }

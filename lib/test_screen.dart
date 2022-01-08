@@ -26,51 +26,6 @@ class _TestScreenState extends State<TestScreen> {
           child: Column(
             children: [
               Button(
-                label: 'Small',
-                onTap: () {},
-                buttonSize: ButtonSize.small,
-              ),
-              Button.secondary(
-                label: 'Small',
-                onTap: () {},
-                buttonSize: ButtonSize.small,
-              ),
-              Button.outlined(
-                label: 'Small',
-                onTap: () {},
-                buttonSize: ButtonSize.small,
-              ),
-              Button(
-                label: 'Medium',
-                onTap: () {},
-                buttonSize: ButtonSize.medium,
-              ),
-              Button.secondary(
-                label: 'Medium',
-                onTap: () {},
-                buttonSize: ButtonSize.medium,
-              ),
-              Button.outlined(
-                label: 'Medium',
-                onTap: () {},
-                buttonSize: ButtonSize.medium,
-              ),
-              Button(
-                label: 'Large',
-                onTap: () {},
-                buttonSize: ButtonSize.large,
-              ),
-              Button.secondary(
-                label: 'Large',
-                onTap: () {},
-                buttonSize: ButtonSize.large,
-              ),
-              Button.outlined(
-                label: 'Large',
-                onTap: () {},
-                buttonSize: ButtonSize.large,
-              ),
-              Button(
                 label: 'Get Color',
                 buttonColor: buttonColor,
                 onTap: () {
@@ -91,7 +46,7 @@ class _TestScreenState extends State<TestScreen> {
                           ),
                           physics: const BouncingScrollPhysics(),
                           scrollDirection: Axis.horizontal,
-                          itemCount: subjectColors.length,
+                          itemCount: kSubjectColors.length,
                           itemBuilder: (_, index) => GestureDetector(
                             onTap: () {
                               setState(() {
@@ -101,7 +56,7 @@ class _TestScreenState extends State<TestScreen> {
                             child: Container(
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                color: subjectColors[index],
+                                color: kSubjectColors[index],
                               ),
                               child: selectedIndex == index
                                   ? const Icon(
@@ -122,7 +77,7 @@ class _TestScreenState extends State<TestScreen> {
                           label: 'Select',
                           onTap: () {
                             setState(() {
-                              buttonColor = subjectColors[selectedIndex];
+                              buttonColor = kSubjectColors[selectedIndex];
                             });
                             Navigator.pop(context);
                           },

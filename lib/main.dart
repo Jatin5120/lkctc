@@ -17,8 +17,8 @@ void main() async {
 
 void initializeControllers() {
   Get.put(ThemeController());
-  Get.put(NavBarController());
   Get.put(StorageController());
+  Get.put(NavBarController());
   Get.put(SplashController());
   Get.put(AuthenticationController());
 }
@@ -38,6 +38,7 @@ class MyApp extends StatelessWidget {
       themeMode: themeController.themeMode,
       initialRoute: AppPages.initialRoute,
       getPages: AppPages.pages,
+      // home: const TestScreen(),
     );
   }
 }

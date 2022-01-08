@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
+
 class FacultyModal {
   final String userID;
   final String facultyID;
@@ -10,6 +12,7 @@ class FacultyModal {
   final String department;
   final String designation;
   final bool isVerified;
+  final List<String> classes;
 
   const FacultyModal({
     required this.userID,
@@ -21,6 +24,7 @@ class FacultyModal {
     required this.department,
     required this.designation,
     required this.isVerified,
+    required this.classes,
   });
 
   FacultyModal copyWith({
@@ -33,6 +37,7 @@ class FacultyModal {
     String? department,
     String? designation,
     bool? isVerified,
+    List<String>? classes,
   }) {
     return FacultyModal(
       userID: userID ?? this.userID,
@@ -44,6 +49,7 @@ class FacultyModal {
       department: department ?? this.department,
       designation: designation ?? this.designation,
       isVerified: isVerified ?? this.isVerified,
+      classes: classes ?? this.classes,
     );
   }
 
@@ -58,6 +64,7 @@ class FacultyModal {
       'department': department,
       'designation': designation,
       'isVerified': isVerified,
+      'classes': classes,
     };
   }
 
@@ -72,6 +79,7 @@ class FacultyModal {
       department: '',
       designation: '',
       isVerified: false,
+      classes: [],
     );
   }
 
@@ -86,6 +94,7 @@ class FacultyModal {
       department: map['department'] ?? '',
       designation: map['designation'] ?? '',
       isVerified: map['isVerified'] ?? false,
+      classes: List<String>.from(map['classes']),
     );
   }
 
@@ -96,7 +105,7 @@ class FacultyModal {
 
   @override
   String toString() {
-    return 'FacultyModal(userID: $userID, facultyID: $facultyID, name: $name, email: $email, phone: $phone, password: $password, department: $department, designation: $designation, isVerified: $isVerified)';
+    return 'FacultyModal(userID: $userID, facultyID: $facultyID, name: $name, email: $email, phone: $phone, password: $password, department: $department, designation: $designation, isVerified: $isVerified, classes: $classes)';
   }
 
   @override
@@ -112,7 +121,8 @@ class FacultyModal {
         other.password == password &&
         other.department == department &&
         other.designation == designation &&
-        other.isVerified == isVerified;
+        other.isVerified == isVerified &&
+        listEquals(other.classes, classes);
   }
 
   @override
@@ -125,6 +135,7 @@ class FacultyModal {
         password.hashCode ^
         department.hashCode ^
         designation.hashCode ^
-        isVerified.hashCode;
+        isVerified.hashCode ^
+        classes.hashCode;
   }
 }

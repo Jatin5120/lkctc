@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../constants/constants.dart';
-import '../widgets/widgets.dart';
+import '../../constants/constants.dart';
+import '../../widgets/widgets.dart';
 
 class StudentLoginView extends StatelessWidget {
   const StudentLoginView({Key? key}) : super(key: key);

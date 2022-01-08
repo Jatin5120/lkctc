@@ -1,8 +1,10 @@
 import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'faculty.dart';
+
+import '../constants/constants.dart';
+import '../modals/modals.dart';
+import '../services/services.dart';
 
 abstract class FacultyService {
   const FacultyService._();
@@ -26,7 +28,7 @@ abstract class FacultyService {
       DialogService.showLoadingDialog(message: 'Logging in');
 
       UserCredential? userCredential =
-          await AuthenticationController.loginUser(email, password);
+          await AuthenticationService.login(email, password);
 
       // print(userCredential);
 
@@ -47,39 +49,40 @@ abstract class FacultyService {
     }
   }
 
-  static Future<dynamic> addFaculty(FacultyModal facultyModal) async {
+  static Future<bool> registerFaculty(FacultyModal facultyModal) async {
     try {
       DialogService.showLoadingDialog(message: "Registering faculty");
 
-      DocumentReference pendingReference =
+      final DocumentReference pendingReference =
           await _pendingCollection.add(facultyModal);
 
       FacultyModal faculty = facultyModal.copyWith(
         facultyID: pendingReference.id,
-        // userID: _firebaseAuth.currentUser!.uid,
       );
 
       _pendingCollection.doc(pendingReference.id).set(faculty);
 
-      await AuthenticationController.registerUser(
+      await AuthenticationService.register(
         facultyModal.email,
         facultyModal.password,
       );
 
       faculty = faculty.copyWith(userID: _firebaseAuth.currentUser!.uid);
 
-      _pendingCollection.doc(pendingReference.id).set(faculty);
+      await _pendingCollection.doc(pendingReference.id).set(faculty);
 
       await _firebaseAuth.currentUser!.updateDisplayName(facultyModal.name);
 
-      DialogService.closeDialog();
+      return true;
     } catch (e, st) {
-      DialogService.closeDialog();
       DialogService.showSnackBar(
         'Unknown Error',
         'An unknown error occured while registering, try again after some time',
       );
       log("Add faculty Error --> ${e.toString()}\n$st");
+      return false;
+    } finally {
+      DialogService.closeDialog();
     }
   }
 }

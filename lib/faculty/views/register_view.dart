@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lkctc_student_app/constants/constants.dart';
+import 'package:lkctc_student_app/modals/modals.dart';
+import 'package:lkctc_student_app/routes/routes.dart';
+import 'package:lkctc_student_app/widgets/widgets.dart';
 import '../faculty.dart';
 
 class FacultyRegisterView extends GetView<FacultyController> {
@@ -133,7 +137,7 @@ class FacultyRegisterView extends GetView<FacultyController> {
                 Button(
                   label: 'Register',
                   buttonSize: ButtonSize.large,
-                  onTap: () {
+                  onTap: () async {
                     if (_formKey.currentState!.validate()) {
                       final FacultyModal facultyModal = FacultyModal(
                         userID: '',
@@ -145,8 +149,14 @@ class FacultyRegisterView extends GetView<FacultyController> {
                         department: _department,
                         designation: _designation,
                         isVerified: false,
+                        classes: [],
                       );
-                      FacultyService.addFaculty(facultyModal);
+                      final bool registered =
+                          await FacultyService.registerFaculty(facultyModal);
+
+                      if (registered) {
+                        Get.offAllNamed(FacultyRoutes.notVerified);
+                      }
                     }
                   },
                 ),

@@ -16,10 +16,12 @@ class InputField extends StatelessWidget {
     this.floatingLabel = false,
     this.obscureText = false,
     this.maxLength,
+    this.maxLines = 1,
     this.onFieldSubmitted,
     this.onChanged,
     this.textInputType = TextInputType.text,
     this.textInputAction = TextInputAction.next,
+    this.textCapitalization = TextCapitalization.words,
   }) : super(key: key);
 
   final String label;
@@ -29,12 +31,14 @@ class InputField extends StatelessWidget {
   final bool floatingLabel;
   final TextInputType textInputType;
   final TextInputAction textInputAction;
+  final TextCapitalization textCapitalization;
   final Widget? prefix;
   final Widget? prefixIcon;
   final Widget? suffix;
   final Widget? suffixIcon;
   final bool obscureText;
   final int? maxLength;
+  final int? maxLines;
   final void Function(String)? onFieldSubmitted;
   final void Function(String)? onChanged;
 
@@ -69,10 +73,11 @@ class InputField extends StatelessWidget {
             onChanged: onChanged,
             validator: validator,
             obscureText: obscureText,
+            maxLines: maxLines,
             maxLength: maxLength,
             keyboardType: textInputType,
             textInputAction: textInputAction,
-            textCapitalization: TextCapitalization.words,
+            textCapitalization: textCapitalization,
           ),
         ],
       ),

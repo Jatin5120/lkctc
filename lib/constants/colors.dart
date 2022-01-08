@@ -41,7 +41,7 @@ const Color kShadowColorDark = Color(0x880B0D0E);
 const Color kIconColorLight = Color(0xFF353CFD);
 const Color kIconColorDark = Color(0xFFFFFFFF);
 
-const List<Color> subjectColors = [
+const List<Color> kSubjectColors = [
   Color(0xFF2E9E8B),
   Color(0xFF30CFD0),
   Color(0xFF3476B2),

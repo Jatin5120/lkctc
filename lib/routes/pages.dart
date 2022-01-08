@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 
+import 'routes.dart';
 import '../bindings/bindings.dart';
 import '../admin/admin.dart';
 import '../student/student.dart';
@@ -24,10 +25,12 @@ abstract class AppPages {
     GetPage(
       name: AdminRoutes.login,
       page: () => const AdminLoginView(),
+      binding: AdminBinding(),
     ),
     GetPage(
-      name: StudentRoutes.login,
-      page: () => const StudentLoginView(),
+      name: AdminRoutes.homeWrapper,
+      page: () => const AdminHomeWrapper(),
+      binding: AdminBinding(),
     ),
     GetPage(
       name: FacultyRoutes.login,
@@ -38,6 +41,19 @@ abstract class AppPages {
       name: FacultyRoutes.register,
       page: () => const FacultyRegisterView(),
       binding: FacultuBinding(),
+    ),
+    GetPage(
+      name: FacultyRoutes.homeWrapper,
+      page: () => const FacultyHomeWrapper(),
+      binding: FacultuBinding(),
+    ),
+    GetPage(
+      name: FacultyRoutes.notVerified,
+      page: () => const NotVerifiedView(),
+    ),
+    GetPage(
+      name: StudentRoutes.login,
+      page: () => const StudentLoginView(),
     ),
   ];
 }
