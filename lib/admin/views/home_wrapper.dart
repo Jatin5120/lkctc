@@ -23,7 +23,7 @@ class AdminHomeWrapper extends StatelessWidget {
             case 1:
               return const AddEventsView();
             case 2:
-              return AddNoticesView();
+              return const AddNoticesView();
             case 3:
               return const SettingsView();
             default:

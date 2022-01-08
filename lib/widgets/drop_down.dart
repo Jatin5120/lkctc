@@ -22,7 +22,7 @@ class DropDown<T> extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 4.0, top: 8.0),
+          padding: const EdgeInsets.only(top: 8.0),
           child: InputLabel(label),
         ),
         DropdownButtonFormField<T>(

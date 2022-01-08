@@ -1,6 +1,5 @@
 // ignore_for_file: invalid_use_of_protected_member
 
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,9 +10,9 @@ import 'package:lkctc_student_app/services/services.dart';
 import 'package:lkctc_student_app/widgets/widgets.dart';
 
 class AddNoticesView extends StatelessWidget {
-  AddNoticesView({Key? key}) : super(key: key);
+  const AddNoticesView({Key? key}) : super(key: key);
 
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   static final TextEditingController _titleController = TextEditingController();
   static final TextEditingController _descriptionController =
@@ -112,7 +111,7 @@ class AddNoticesView extends StatelessWidget {
                       return null;
                     },
                   ),
-                  const _UploadFile(),
+                  const UploadFile(),
                   const Spacer(),
                   Button(
                     label: 'Upload Notice',
@@ -124,84 +123,6 @@ class AddNoticesView extends StatelessWidget {
               ),
             ),
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class _UploadFile extends StatelessWidget {
-  const _UploadFile({Key? key}) : super(key: key);
-
-  static final AdminController _adminController = Get.find();
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.symmetric(vertical: 16).copyWith(top: 24),
-      child: Padding(
-        padding: const EdgeInsets.all(8)
-            .copyWith(left: _adminController.file == null ? 16 : 12),
-        child: Row(
-          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Obx(
-              () => _adminController.file == null
-                  ? const SizedBox.shrink()
-                  : SizedBox(
-                      height: 100,
-                      child: ClipRRect(
-                        borderRadius: kSmallRadius,
-                        child: Image.file(_adminController.file!),
-                      ),
-                    ),
-            ),
-            Obx(
-              () => _adminController.file == null
-                  ? Label(
-                      'No file selected',
-                      style: Get.textTheme.subtitle2,
-                    )
-                  : Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 12),
-                        child: Label.primary(
-                          _adminController.fileName,
-                          style: Get.textTheme.subtitle2,
-                        ),
-                      ),
-                    ),
-            ),
-            Obx(
-              () => _adminController.file == null
-                  ? const Spacer()
-                  : const SizedBox.shrink(),
-            ),
-            Obx(
-              () => Column(
-                children: [
-                  if (_adminController.file != null) ...[
-                    Button(
-                      label: 'Remove',
-                      onTap: () => _adminController.file = null,
-                      buttonColor: kErrorColor,
-                    ),
-                    const SizedBox(height: 8),
-                  ],
-                  Button(
-                    label: _adminController.file == null ? 'Upload' : 'Change',
-                    onTap: () async {
-                      File? file = await DocumentService.getDocument();
-                      if (file != null) {
-                        _adminController.file = file;
-                        _adminController.refresh();
-                      }
-                    },
-                  ),
-                ],
-              ),
-            ),
-          ],
         ),
       ),
     );

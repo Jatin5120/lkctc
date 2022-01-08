@@ -7,6 +7,7 @@ class EventModal {
   final int lastDate;
   final String registerationLink;
   final String submissionLink;
+  final String imageUrl;
 
   const EventModal({
     required this.evendID,
@@ -15,6 +16,7 @@ class EventModal {
     required this.lastDate,
     required this.registerationLink,
     required this.submissionLink,
+    required this.imageUrl,
   });
 
   EventModal copyWith({
@@ -24,6 +26,7 @@ class EventModal {
     int? lastDate,
     String? registerationLink,
     String? submissionLink,
+    String? imageUrl,
   }) {
     return EventModal(
       evendID: evendID ?? this.evendID,
@@ -32,6 +35,7 @@ class EventModal {
       lastDate: lastDate ?? this.lastDate,
       registerationLink: registerationLink ?? this.registerationLink,
       submissionLink: submissionLink ?? this.submissionLink,
+      imageUrl: imageUrl ?? this.imageUrl,
     );
   }
 
@@ -43,17 +47,19 @@ class EventModal {
       'lastDate': lastDate,
       'registerationLink': registerationLink,
       'submissionLink': submissionLink,
+      'imageUrl': imageUrl,
     };
   }
 
   factory EventModal.fromMap(Map<String, dynamic> map) {
     return EventModal(
-      evendID: map['evendID'],
-      name: map['name'],
-      description: map['description'],
-      lastDate: map['lastDate'],
-      registerationLink: map['registerationLink'],
-      submissionLink: map['submissionLink'],
+      evendID: map['evendID'] ?? '',
+      name: map['name'] ?? '',
+      description: map['description'] ?? '',
+      lastDate: map['lastDate']?.toInt() ?? 0,
+      registerationLink: map['registerationLink'] ?? '',
+      submissionLink: map['submissionLink'] ?? '',
+      imageUrl: map['imageUrl'] ?? '',
     );
   }
 
@@ -64,7 +70,7 @@ class EventModal {
 
   @override
   String toString() {
-    return 'EventModal(evendID: $evendID, name: $name, description: $description, lastDate: $lastDate, registerationLink: $registerationLink, submissionLink: $submissionLink)';
+    return 'EventModal(evendID: $evendID, name: $name, description: $description, lastDate: $lastDate, registerationLink: $registerationLink, submissionLink: $submissionLink, imageUrl: $imageUrl)';
   }
 
   @override
@@ -77,7 +83,8 @@ class EventModal {
         other.description == description &&
         other.lastDate == lastDate &&
         other.registerationLink == registerationLink &&
-        other.submissionLink == submissionLink;
+        other.submissionLink == submissionLink &&
+        other.imageUrl == imageUrl;
   }
 
   @override
@@ -87,6 +94,7 @@ class EventModal {
         description.hashCode ^
         lastDate.hashCode ^
         registerationLink.hashCode ^
-        submissionLink.hashCode;
+        submissionLink.hashCode ^
+        imageUrl.hashCode;
   }
 }

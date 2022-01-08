@@ -11,6 +11,7 @@ class AdminController extends GetxController {
   final RxBool _hidePassword = true.obs;
   final RxBool _isLoggedIn = false.obs;
   final RxBool _showError = false.obs;
+  final Rx<DateTime> _lastDate = DateTime.now().obs;
 
   final RxString _error = ''.obs;
 
@@ -52,6 +53,8 @@ class AdminController extends GetxController {
     Get.toNamed(AdminRoutes.login);
   }
 
+  String get displayeTargetDateMonth => _lastDate.value.displayDateMonth();
+
   String get fileName => file!.path.split('/').last;
 
   bool get hidePassword => _hidePassword.value;
@@ -65,6 +68,10 @@ class AdminController extends GetxController {
   bool get showError => _showError.value;
 
   set showError(bool showError) => _showError.value = showError;
+
+  DateTime get lastDate => _lastDate.value;
+
+  set lastDate(DateTime lastDate) => _lastDate.value = lastDate;
 
   String get error => _error.value;
 

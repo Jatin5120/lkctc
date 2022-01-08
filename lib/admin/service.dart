@@ -43,6 +43,13 @@ class AdminService {
         toFirestore: (noticeModal, _) => noticeModal.toMap(),
       );
 
+  static final CollectionReference _eventCollection = _firebaseFirestore
+      .collection(kEventsCollection)
+      .withConverter<EventModal>(
+        fromFirestore: (snapshot, _) => EventModal.fromMap(snapshot.data()!),
+        toFirestore: (eventModal, _) => eventModal.toMap(),
+      );
+
   // ---------------------- Streams ----------------------
 
   static final Stream<QuerySnapshot> pendingStream = _firebaseFirestore
@@ -147,7 +154,24 @@ class AdminService {
       return true;
     } catch (e, st) {
       DialogService.closeDialog();
-      log("Rejecting Faculty Error --> $e\n$st");
+      log("Add Notice Error --> $e\n$st");
+      return false;
+    }
+  }
+
+  static Future<bool> createNotice(EventModal eventModal) async {
+    try {
+      DialogService.showLoadingDialog(message: 'Creating Event');
+
+      DocumentReference eventReference = await _eventCollection.add(eventModal);
+
+      await eventReference.set(eventModal.copyWith(evendID: eventReference.id));
+
+      DialogService.closeDialog();
+      return true;
+    } catch (e, st) {
+      DialogService.closeDialog();
+      log("Create Event Error --> $e\n$st");
       return false;
     }
   }

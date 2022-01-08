@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:lkctc_student_app/constants/constants.dart';
 
 extension Percentage on double {
@@ -79,4 +80,14 @@ extension FileName on DateTime {
       .replaceAll('-', '')
       .replaceAll(':', '')
       .replaceAll(' ', '_');
+}
+
+extension DateTimeParser on DateTime {
+  String displayDateMonth() {
+    return DateFormat('MMM dd').format(this);
+  }
+
+  String displayDate() {
+    return DateFormat('dd').format(this);
+  }
 }
