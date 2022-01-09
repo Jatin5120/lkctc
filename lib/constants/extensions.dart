@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lkctc_student_app/constants/constants.dart';
 
@@ -89,5 +90,33 @@ extension DateTimeParser on DateTime {
 
   String displayDate() {
     return DateFormat('dd').format(this);
+  }
+}
+
+extension ToString on ThemeMode {
+  String string() {
+    switch (this) {
+      case ThemeMode.light:
+        return 'Light';
+      case ThemeMode.dark:
+        return 'Dark';
+      case ThemeMode.system:
+        return 'System';
+    }
+  }
+}
+
+extension GetThemeMode on String {
+  ThemeMode get toTheme {
+    switch (this) {
+      case 'Light':
+        return ThemeMode.light;
+      case 'Dark':
+        return ThemeMode.dark;
+      case 'System':
+        return ThemeMode.system;
+      default:
+        return ThemeMode.system;
+    }
   }
 }

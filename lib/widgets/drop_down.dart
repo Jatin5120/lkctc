@@ -8,12 +8,14 @@ class DropDown<T> extends StatelessWidget {
     required this.label,
     required this.items,
     this.hintText,
+    this.value,
     required this.onChanged,
   }) : super(key: key);
 
   final String label;
   final String? hintText;
   final List<T> items;
+  final T? value;
   final void Function(T?) onChanged;
 
   @override
@@ -34,6 +36,7 @@ class DropDown<T> extends StatelessWidget {
                 ),
               )
               .toList(),
+          value: value,
           onChanged: onChanged,
           decoration: InputDecoration(
             hintText: hintText ?? 'Select $label',

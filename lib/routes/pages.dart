@@ -23,6 +23,10 @@ abstract class AppPages {
       binding: AuthenticationBinding(),
     ),
     GetPage(
+      name: CommonRoutes.changeTheme,
+      page: () => const ChangeThemeView(),
+    ),
+    GetPage(
       name: AdminRoutes.login,
       page: () => const AdminLoginView(),
       binding: AdminBinding(),
@@ -31,6 +35,10 @@ abstract class AppPages {
       name: AdminRoutes.homeWrapper,
       page: () => const AdminHomeWrapper(),
       binding: AdminBinding(),
+    ),
+    GetPage(
+      name: AdminRoutes.changePassword,
+      page: () => const AdminChangePasswordView(),
     ),
     GetPage(
       name: FacultyRoutes.login,

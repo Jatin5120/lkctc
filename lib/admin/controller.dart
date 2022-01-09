@@ -9,6 +9,7 @@ class AdminController extends GetxController {
   static final StorageController _storageController = Get.find();
 
   final RxBool _hidePassword = true.obs;
+  final RxBool _hideNewPassword = true.obs;
   final RxBool _isLoggedIn = false.obs;
   final RxBool _showError = false.obs;
   final Rx<DateTime> _lastDate = DateTime.now().obs;
@@ -60,6 +61,11 @@ class AdminController extends GetxController {
   bool get hidePassword => _hidePassword.value;
 
   set hidePassword(bool hidePassword) => _hidePassword.value = hidePassword;
+
+  bool get hideNewPassword => _hideNewPassword.value;
+
+  set hideNewPassword(bool hideNewPassword) =>
+      _hideNewPassword.value = hideNewPassword;
 
   bool get isLoggedIn => _isLoggedIn.value;
 

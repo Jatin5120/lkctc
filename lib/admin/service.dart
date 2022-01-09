@@ -3,32 +3,32 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+
 import 'package:lkctc_student_app/admin/admin.dart';
 import 'package:lkctc_student_app/constants/constants.dart';
-import 'package:lkctc_student_app/controllers/controllers.dart';
 import 'package:lkctc_student_app/modals/modals.dart';
 import 'package:lkctc_student_app/services/services.dart';
 
 class AdminService {
   const AdminService._();
 
-  static final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-
   static final FirebaseFirestore _firebaseFirestore =
       FirebaseFirestore.instance;
 
-  static final AdminController _controller = Get.find();
+  static final AdminController _adminController = Get.find();
 
   // ---------------------- Firebase references ----------------------
 
   static final DocumentReference _adminCollection =
-      _firebaseFirestore.collection(kAdminCollection).doc('admin');
+      _firebaseFirestore.collection(kAdminCollection).doc(kAdminCollection);
+
   static final CollectionReference _pendingCollection = _firebaseFirestore
       .collection(kPendingCollection)
       .withConverter<FacultyModal>(
         fromFirestore: (snapshot, _) => FacultyModal.fromMap(snapshot.data()!),
         toFirestore: (facultyModal, _) => facultyModal.toMap(),
       );
+
   static final CollectionReference _facultyCollection = _firebaseFirestore
       .collection(kFacultyCollection)
       .withConverter<FacultyModal>(
@@ -57,6 +57,11 @@ class AdminService {
       .where('userID', isNotEqualTo: '')
       .snapshots();
 
+  static final Stream<DocumentSnapshot> adminStream =
+      _adminCollection.snapshots();
+
+  // ---------------------- Methods ----------------------
+
   static Future<dynamic> login(String id, String password) async {
     try {
       DialogService.showLoadingDialog(message: 'Logging in');
@@ -68,22 +73,38 @@ class AdminService {
       DialogService.closeDialog();
 
       if (id == adminData['id'] && password == adminData['password']) {
-        _controller.error = '';
-        _controller.showError = false;
+        _adminController.error = '';
+        _adminController.showError = false;
         UserCredential? credential = await AuthenticationService.login(
             'admin@lkcengg.edu.in', 'admin123', true);
         if (credential != null) {
-          _controller.logIn();
+          _adminController.logIn();
         } else {
           DialogService.showErrorDialog(message: 'Cannot login at the moment');
         }
       } else {
-        _controller.error = 'Incorrect Admin id or password';
-        _controller.showError = true;
+        _adminController.error = 'Incorrect Admin id or password';
+        _adminController.showError = true;
       }
     } catch (e, st) {
       DialogService.closeDialog();
       log("Admin Login Error --> $e\n$st");
+    }
+  }
+
+  static Future<bool> changePassword(String password) async {
+    try {
+      DialogService.showLoadingDialog(message: 'Changing password');
+
+      await _adminCollection.update(
+        {'password': password},
+      );
+      return true;
+    } catch (e, st) {
+      log("Change Password Error --> $e\n$st");
+      return false;
+    } finally {
+      DialogService.closeDialog();
     }
   }
 

@@ -36,12 +36,14 @@ class Label extends GetWidget<ThemeController> {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      label,
-      style: style?.copyWith(
-        color: controller.isDarkMode ? _textColorDark : _textColorLight,
+    return Obx(
+      () => Text(
+        label,
+        style: style?.copyWith(
+          color: controller.isDarkMode ? _textColorDark : _textColorLight,
+        ),
+        softWrap: true,
       ),
-      softWrap: true,
     );
   }
 }

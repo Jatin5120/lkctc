@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lkctc_student_app/constants/colors.dart';
 import 'package:lkctc_student_app/controllers/controllers.dart';
-import 'package:lkctc_student_app/services/dialog_service.dart';
 import 'package:lkctc_student_app/widgets/widgets.dart';
 
 import 'home_views/home_views.dart';

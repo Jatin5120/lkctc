@@ -45,7 +45,7 @@ abstract class FacultyService {
         'Unknown Error',
         'An unknown error occured while registering, try again after some time',
       );
-      log("Add faculty Error --> ${e.toString()}\n$st");
+      log("Login faculty Error --> ${e.toString()}\n$st");
     }
   }
 

@@ -14,6 +14,11 @@ ThemeData kLightTheme = ThemeData(
     elevation: 10,
     shape: kLargeBorder,
   ),
+  appBarTheme: const AppBarTheme(
+    iconTheme: IconThemeData(
+      color: kBlackColor,
+    ),
+  ),
   textTheme: kTextTheme,
   floatingActionButtonTheme: const FloatingActionButtonThemeData(
     backgroundColor: kAccentColorLight,
@@ -86,6 +91,11 @@ ThemeData kDarkTheme = ThemeData(
     shadowColor: kShadowColorDark,
     elevation: 10,
     shape: kLargeBorder,
+  ),
+  appBarTheme: const AppBarTheme(
+    iconTheme: IconThemeData(
+      color: kWhiteColor,
+    ),
   ),
   textTheme: kTextTheme,
   floatingActionButtonTheme: const FloatingActionButtonThemeData(

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'package:lkctc_student_app/admin/admin.dart';
-
-import 'package:lkctc_student_app/constants/colors.dart';
+import 'package:lkctc_student_app/constants/constants.dart';
+import 'package:lkctc_student_app/routes/admin_routes.dart';
+import 'package:lkctc_student_app/routes/common_routes.dart';
 import 'package:lkctc_student_app/services/services.dart';
-
-import '../../../widgets/widgets.dart';
+import 'package:lkctc_student_app/widgets/widgets.dart';
 
 class SettingsView extends StatelessWidget {
   const SettingsView({Key? key}) : super(key: key);
@@ -17,26 +18,26 @@ class SettingsView extends StatelessWidget {
       color: kSubjectColors[14],
       iconData: Icons.wb_sunny_outlined,
       title: 'Theme',
-      onTap: () {},
+      onTap: () => Get.toNamed(CommonRoutes.changeTheme),
     ),
     _SettingsTileModal(
       color: kSubjectColors[0],
       iconData: Icons.help_outline_outlined,
-      title: 'FAQs',
-      onTap: () {},
+      title: 'Change Password',
+      onTap: () => Get.toNamed(AdminRoutes.changePassword),
     ),
-    _SettingsTileModal(
-      color: kSubjectColors[9],
-      iconData: Icons.info_outlined,
-      title: 'About',
-      onTap: () {},
-    ),
-    _SettingsTileModal(
-      color: kSubjectColors[5],
-      iconData: Icons.support_agent_outlined,
-      title: 'Help & Support',
-      onTap: () {},
-    ),
+    // _SettingsTileModal(
+    //   color: kSubjectColors[9],
+    //   iconData: Icons.info_outlined,
+    //   title: 'About',
+    //   onTap: () {},
+    // ),
+    // _SettingsTileModal(
+    //   color: kSubjectColors[5],
+    //   iconData: Icons.support_agent_outlined,
+    //   title: 'Help & Support',
+    //   onTap: () {},
+    // ),
     const _SettingsTileModal(
       color: kErrorColor,
       iconData: Icons.logout_outlined,
@@ -73,11 +74,6 @@ class SettingsView extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Label('Account', style: Get.textTheme.subtitle1),
-              const _ProfileTile(),
-              const SizedBox(height: 16),
-              Label('Settings', style: Get.textTheme.subtitle1),
-              const SizedBox(height: 16),
               for (_SettingsTileModal settingsModal in _settingTiles) ...[
                 _SettingsTile(settingsModal: settingsModal)
               ],
@@ -128,38 +124,6 @@ class _SettingsTile extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class _ProfileTile extends StatelessWidget {
-  const _ProfileTile({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16.0),
-      child: Row(
-        children: [
-          const CircleAvatar(
-            radius: 32,
-            backgroundColor: kPrimaryColor,
-          ),
-          const SizedBox(width: 16),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Label('Jatin', style: Get.textTheme.headline6),
-              const SizedBox(height: 4),
-              Label('Personal Info', style: Get.textTheme.bodyText2),
-            ],
-          ),
-          const Spacer(),
-          const Icon(Icons.chevron_right_rounded),
-        ],
       ),
     );
   }
