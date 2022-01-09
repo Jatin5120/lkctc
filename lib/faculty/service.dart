@@ -1,6 +1,9 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get/get.dart';
+import 'package:lkctc_student_app/faculty/faculty.dart';
+import 'package:lkctc_student_app/routes/faculty_routes.dart';
 
 import '../constants/constants.dart';
 import '../modals/modals.dart';
@@ -14,10 +17,19 @@ abstract class FacultyService {
   static final FirebaseFirestore _firebaseFirestore =
       FirebaseFirestore.instance;
 
+  static final FacultyController _facultyController = Get.find();
+
   // ---------------------- Firebase references ----------------------
 
   static final CollectionReference _pendingCollection = _firebaseFirestore
       .collection(kPendingCollection)
+      .withConverter<FacultyModal>(
+        fromFirestore: (snapshot, _) => FacultyModal.fromMap(snapshot.data()!),
+        toFirestore: (facultyModal, _) => facultyModal.toMap(),
+      );
+
+  static final CollectionReference _facultyCollection = _firebaseFirestore
+      .collection(kFacultyCollection)
       .withConverter<FacultyModal>(
         fromFirestore: (snapshot, _) => FacultyModal.fromMap(snapshot.data()!),
         toFirestore: (facultyModal, _) => facultyModal.toMap(),
@@ -30,13 +42,28 @@ abstract class FacultyService {
       UserCredential? userCredential =
           await AuthenticationService.login(email, password);
 
-      // print(userCredential);
+      if (userCredential == null) {
+        DialogService.closeDialog();
+        DialogService.showErrorDialog(
+          title: 'Error Signing in',
+          message:
+              'Invalid Email or Password. Kindly check and try again later',
+        );
+        return;
+      }
 
       QuerySnapshot faculty = await _pendingCollection
-          .where('userID', isEqualTo: userCredential!.user!.uid)
+          .where('userID', isEqualTo: userCredential.user!.uid)
           .get();
 
-      print(faculty.docs.first.data());
+      if (faculty.docs.isEmpty) {
+        faculty = await _facultyCollection
+            .where('userID', isEqualTo: userCredential.user!.uid)
+            .get();
+        _facultyController.isLoggedIn = true;
+      } else {
+        Get.offAllNamed(FacultyRoutes.notVerified);
+      }
 
       DialogService.closeDialog();
     } catch (e, st) {

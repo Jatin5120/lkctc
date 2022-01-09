@@ -7,6 +7,7 @@ import '../routes/routes.dart';
 
 class AdminController extends GetxController {
   static final StorageController _storageController = Get.find();
+  static final NavBarController _navBarController = Get.find();
 
   final RxBool _hidePassword = true.obs;
   final RxBool _hideNewPassword = true.obs;
@@ -18,8 +19,6 @@ class AdminController extends GetxController {
 
   final Rx<File?> _file = Rx<File?>(null);
 
-  bool _didTryLogin = false;
-
   @override
   void onReady() {
     super.onReady();
@@ -28,30 +27,22 @@ class AdminController extends GetxController {
   }
 
   void _handleLogin(bool loggedIn) {
-    if (_didTryLogin) {
-      _storageController.writeUserLoggedIn(loggedIn);
-      _storageController.writeUserType(UserType.admin.type);
-      _didTryLogin = false;
+    _storageController.writeUserLoggedIn(loggedIn);
+    _storageController.writeUserType(UserType.admin.type);
 
-      if (loggedIn) {
-        Get.offAllNamed(AdminRoutes.homeWrapper);
-      } else {
-        // Get.offAllNamed(CommonRoutes.auth);
-        // Get.toNamed(AdminRoutes.login);
-      }
+    if (loggedIn) {
+      Get.offAllNamed(AdminRoutes.homeWrapper);
+    } else {
+      // Get.offAllNamed(CommonRoutes.auth);
+      // Get.toNamed(AdminRoutes.login);
     }
   }
 
-  void logIn() {
-    _didTryLogin = true;
-    isLoggedIn = true;
-  }
-
   void logOut() {
-    _didTryLogin = true;
     isLoggedIn = false;
     Get.offAllNamed(CommonRoutes.auth);
     Get.toNamed(AdminRoutes.login);
+    _navBarController.selectedIndex = 0;
   }
 
   String get displayeTargetDateMonth => _lastDate.value.displayDateMonth();

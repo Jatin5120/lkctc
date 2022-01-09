@@ -78,7 +78,7 @@ class AdminService {
         UserCredential? credential = await AuthenticationService.login(
             'admin@lkcengg.edu.in', 'admin123', true);
         if (credential != null) {
-          _adminController.logIn();
+          _adminController.isLoggedIn = true;
         } else {
           DialogService.showErrorDialog(message: 'Cannot login at the moment');
         }

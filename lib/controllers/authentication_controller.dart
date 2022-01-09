@@ -38,7 +38,7 @@ class AuthenticationController extends GetxController {
           Get.offAllNamed(AdminRoutes.homeWrapper);
           break;
         case UserType.faculty:
-          Get.put(FacultyController());
+          Get.offAllNamed(FacultyRoutes.homeWrapper);
           break;
         case UserType.student:
           Get.put(StudentController());
