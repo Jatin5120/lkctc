@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:lkctc_student_app/controllers/controllers.dart';
 import 'package:lkctc_student_app/faculty/faculty.dart';
 import 'package:lkctc_student_app/routes/faculty_routes.dart';
 
@@ -18,6 +19,7 @@ abstract class FacultyService {
       FirebaseFirestore.instance;
 
   static final FacultyController _facultyController = Get.find();
+  static final StorageController _storageController = Get.find();
 
   // ---------------------- Firebase references ----------------------
 
@@ -34,6 +36,17 @@ abstract class FacultyService {
         fromFirestore: (snapshot, _) => FacultyModal.fromMap(snapshot.data()!),
         toFirestore: (facultyModal, _) => facultyModal.toMap(),
       );
+
+  // ---------------------- Streams ----------------------
+
+  static final Stream<QuerySnapshot> facultyStream = _facultyCollection
+      .where('userID', isEqualTo: _storageController.facultyID)
+      .snapshots();
+
+  static final Stream<QuerySnapshot> allFacultyStream =
+      _facultyCollection.snapshots();
+
+  // ---------------------- Methods ----------------------
 
   static Future<dynamic> login(String email, String password) async {
     try {
@@ -61,6 +74,7 @@ abstract class FacultyService {
             .where('userID', isEqualTo: userCredential.user!.uid)
             .get();
         _facultyController.isLoggedIn = true;
+        _facultyController.faculty = faculty.docs.first.data() as FacultyModal;
       } else {
         Get.offAllNamed(FacultyRoutes.notVerified);
       }

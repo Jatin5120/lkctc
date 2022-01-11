@@ -5,14 +5,14 @@ import 'label.dart';
 class DropDown<T> extends StatelessWidget {
   const DropDown({
     Key? key,
-    required this.label,
+    this.label,
     required this.items,
     this.hintText,
     this.value,
     required this.onChanged,
   }) : super(key: key);
 
-  final String label;
+  final String? label;
   final String? hintText;
   final List<T> items;
   final T? value;
@@ -23,10 +23,14 @@ class DropDown<T> extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(top: 8.0),
-          child: InputLabel(label),
-        ),
+        if (label != null) ...[
+          Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: InputLabel(label!),
+          ),
+        ] else ...[
+          const SizedBox(height: 16),
+        ],
         DropdownButtonFormField<T>(
           items: items
               .map(

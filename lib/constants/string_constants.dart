@@ -19,3 +19,14 @@ const List<String> kDepartments = [
   'B.Sc MLS',
   'B.Voc',
 ];
+
+const List<String> kSemesters = [
+  "1",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+];

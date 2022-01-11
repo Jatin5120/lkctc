@@ -22,7 +22,7 @@ class SettingsView extends StatelessWidget {
     ),
     _SettingsTileModal(
       color: kSubjectColors[0],
-      iconData: Icons.help_outline_outlined,
+      iconData: Icons.vpn_key_rounded,
       title: 'Change Password',
       onTap: () => Get.toNamed(AdminRoutes.changePassword),
     ),

@@ -5,11 +5,12 @@ import 'package:lkctc_student_app/controllers/controllers.dart';
 
 import 'tap_handler.dart';
 
-class Label extends GetWidget<ThemeController> {
+class Label extends StatelessWidget {
   const Label(
     this.label, {
     Key? key,
     this.style,
+    this.textAlign,
     this.lightColor,
     this.darkColor,
   })  : _textColorLight = lightColor ?? kTextColorLight,
@@ -20,6 +21,7 @@ class Label extends GetWidget<ThemeController> {
     this.label, {
     Key? key,
     this.style,
+    this.textAlign,
     this.lightColor,
     this.darkColor,
   })  : _textColorLight = lightColor ?? kPrimaryColor,
@@ -28,6 +30,7 @@ class Label extends GetWidget<ThemeController> {
 
   final String label;
   final TextStyle? style;
+  final TextAlign? textAlign;
   final Color? lightColor;
   final Color? darkColor;
 
@@ -36,15 +39,16 @@ class Label extends GetWidget<ThemeController> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => Text(
+    return GetBuilder<ThemeController>(builder: (controller) {
+      return Text(
         label,
         style: style?.copyWith(
           color: controller.isDarkMode ? _textColorDark : _textColorLight,
         ),
+        textAlign: textAlign,
         softWrap: true,
-      ),
-    );
+      );
+    });
   }
 }
 

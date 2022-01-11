@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:lkctc_student_app/constants/colors.dart';
-
-import '../../../widgets/widgets.dart';
+import 'package:lkctc_student_app/constants/constants.dart';
+import 'package:lkctc_student_app/faculty/faculty.dart';
+import 'package:lkctc_student_app/routes/routes.dart';
+import 'package:lkctc_student_app/services/services.dart';
+import 'package:lkctc_student_app/widgets/widgets.dart';
 
 class SettingsView extends StatelessWidget {
   const SettingsView({Key? key}) : super(key: key);
+
+  static final FacultyController _facultyController = Get.find();
 
   static final List<_SettingsTileModal> _settingTiles = [
     _SettingsTileModal(
       color: kSubjectColors[14],
       iconData: Icons.wb_sunny_outlined,
       title: 'Theme',
-      onTap: () {},
+      onTap: () => Get.toNamed(CommonRoutes.changeTheme),
     ),
     _SettingsTileModal(
       color: kSubjectColors[0],
@@ -33,13 +37,30 @@ class SettingsView extends StatelessWidget {
       title: 'Help & Support',
       onTap: () {},
     ),
-    _SettingsTileModal(
+    const _SettingsTileModal(
       color: kErrorColor,
       iconData: Icons.logout_outlined,
       title: 'Log Out',
-      onTap: () {},
+      onTap: logOut,
     ),
   ];
+
+  static void logOut() async {
+    DialogService.showConfirmationDialog(
+      title: 'Are you sure want to log out?',
+      actions: [
+        Button.secondary(
+          label: 'LogOut',
+          onTap: _facultyController.logOut,
+          buttonColor: kErrorColor,
+        ),
+        const Button(
+          label: 'Cancel',
+          onTap: DialogService.closeDialog,
+        ),
+      ],
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

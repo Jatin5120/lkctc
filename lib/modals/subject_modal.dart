@@ -39,6 +39,18 @@ class SubjectModal {
     );
   }
 
+  factory SubjectModal.empty() {
+    return const SubjectModal(
+      subjectID: '',
+      classID: '',
+      facultyID: '',
+      name: '',
+      subjectCode: '',
+      department: '',
+      colorIndex: 0,
+    );
+  }
+
   Map<String, dynamic> toMap() {
     return {
       'subjectID': subjectID,

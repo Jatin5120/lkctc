@@ -4,9 +4,11 @@ import 'package:get_storage/get_storage.dart';
 class StorageController extends GetxController {
   final String _userTypeKey = 'userType';
   final String _isUserLoggedInKey = 'isUserLoggedIn';
+  final String _facultyIDKey = "facultyID";
 
   late String userType;
   late bool isUserLoggedIn;
+  late String facultyID;
 
   final GetStorage _storage = GetStorage();
 
@@ -15,6 +17,7 @@ class StorageController extends GetxController {
     super.onReady();
     _readUserType();
     _readUserLoggedIn();
+    _readFacultyID();
   }
 
   void _readUserLoggedIn() {
@@ -33,5 +36,14 @@ class StorageController extends GetxController {
   Future<void> writeUserType(String type) async {
     await _storage.write(_userTypeKey, type);
     _readUserType();
+  }
+
+  void _readFacultyID() {
+    facultyID = _storage.read<String>(_facultyIDKey) ?? '';
+  }
+
+  Future<void> writefacultyID(String id) async {
+    await _storage.write(_facultyIDKey, id);
+    _readFacultyID();
   }
 }

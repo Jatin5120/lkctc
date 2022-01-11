@@ -60,6 +60,10 @@ abstract class AppPages {
       page: () => const NotVerifiedView(),
     ),
     GetPage(
+      name: FacultyRoutes.addClass,
+      page: () => const FacultyAddClassView(),
+    ),
+    GetPage(
       name: StudentRoutes.login,
       page: () => const StudentLoginView(),
     ),

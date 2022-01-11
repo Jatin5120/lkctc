@@ -5,7 +5,7 @@ import 'label.dart';
 class InputField extends StatelessWidget {
   const InputField({
     Key? key,
-    required this.label,
+    this.label,
     required this.controller,
     this.hint,
     this.validator,
@@ -24,7 +24,7 @@ class InputField extends StatelessWidget {
     this.textCapitalization = TextCapitalization.words,
   }) : super(key: key);
 
-  final String label;
+  final String? label;
   final String? hint;
   final TextEditingController controller;
   final String? Function(String?)? validator;
@@ -52,16 +52,18 @@ class InputField extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (!floatingLabel) ...[
+          if (!floatingLabel && label != null) ...[
             Padding(
               padding: const EdgeInsets.only(top: 8.0),
-              child: InputLabel(label),
+              child: InputLabel(label!),
             ),
+          ] else ...[
+            const SizedBox(height: 16),
           ],
           TextFormField(
             controller: controller,
             decoration: InputDecoration(
-              label: floatingLabel ? Text(label) : null,
+              label: floatingLabel && label != null ? Text(label!) : null,
               hintText: hint,
               prefix: prefix,
               prefixIcon: prefixIcon,

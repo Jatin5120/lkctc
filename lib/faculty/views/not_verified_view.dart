@@ -16,6 +16,7 @@ class NotVerifiedView extends StatelessWidget {
         child: Center(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Label.primary(
                 'Account not verified',
@@ -25,6 +26,7 @@ class NotVerifiedView extends StatelessWidget {
               Label(
                 'Your account is not yet verified by the Admin. Kindly contact admin or try again after some time.',
                 style: Get.textTheme.subtitle1,
+                textAlign: TextAlign.center,
               ),
             ],
           ),

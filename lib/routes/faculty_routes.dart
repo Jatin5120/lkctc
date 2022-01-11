@@ -6,4 +6,6 @@ abstract class FacultyRoutes {
 
   static const String homeWrapper = '/facultyHomeWrapper';
   static const String notVerified = '/facultyNotVerified';
+
+  static const String addClass = "/facultyAddClass";
 }

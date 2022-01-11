@@ -161,7 +161,7 @@ class Button extends StatelessWidget {
         break;
 
       case ButtonSize.medium:
-        width = size.width.thirtyFivePercent;
+        width = size.width.fortyPercent;
         padding = const EdgeInsets.symmetric(vertical: 12.0);
         fontSize = 16;
         border = kMediumBorder;
@@ -178,7 +178,7 @@ class Button extends StatelessWidget {
 
       default:
         width = null;
-        padding = const EdgeInsets.symmetric(vertical: 8.0);
+        padding = const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0);
         fontSize = 14;
         border = kSmallBorder;
         outlineWidth = 1;

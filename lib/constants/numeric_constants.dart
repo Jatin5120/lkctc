@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 const double kElevation = 10;
 
+const EdgeInsets kScaffoldPadding = EdgeInsets.symmetric(horizontal: 16.0);
+
 const BorderRadius kSmallRadius = BorderRadius.all(Radius.circular(8));
 const BorderRadius kMediumRadius = BorderRadius.all(Radius.circular(12));
 const BorderRadius kLargeRadius = BorderRadius.all(Radius.circular(16));
