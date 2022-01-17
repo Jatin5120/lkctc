@@ -142,6 +142,7 @@ class FacultyRegisterView extends GetView<FacultyController> {
                       final FacultyModal facultyModal = FacultyModal(
                         userID: '',
                         facultyID: '',
+                        classID: '',
                         name: _nameController.text,
                         email: _emailController.text,
                         phone: _phoneController.text,

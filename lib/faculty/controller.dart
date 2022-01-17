@@ -18,16 +18,16 @@ class FacultyController extends GetxController {
 
   final RxBool _isLoggedIn = false.obs;
   final RxBool _hidePassword = true.obs;
-  final RxString _facultyID = ''.obs;
+  final RxString _facultyUserID = ''.obs;
 
   @override
   void onReady() {
     super.onReady();
     ever(_isLoggedIn, _handleLogin);
-    ever(_faculty, _handleFacultyID);
+    ever(_faculty, _handlefacultyUserID);
     isLoggedIn = _storageController.isUserLoggedIn;
-    facultyID = _storageController.facultyID;
-    log("facultyID --> $facultyID");
+    facultyUserID = _storageController.facultyUserID;
+    log("facultyUserID --> $facultyUserID");
   }
 
   void _handleLogin(bool loggedIn) {
@@ -35,16 +35,15 @@ class FacultyController extends GetxController {
     _storageController.writeUserType(UserType.faculty.type);
 
     if (loggedIn) {
-      Get.offAllNamed(FacultyRoutes.homeWrapper);
-    } else {
-      // Get.offAllNamed(CommonRoutes.auth);
-      // Get.toNamed(FacultyRoutes.login);
+      if (Get.currentRoute != FacultyRoutes.homeWrapper) {
+        Get.offAllNamed(FacultyRoutes.homeWrapper);
+      }
     }
   }
 
-  void _handleFacultyID(FacultyModal facultyModal) {
-    facultyID = faculty.userID;
-    _storageController.writefacultyID(facultyID);
+  void _handlefacultyUserID(FacultyModal facultyModal) {
+    facultyUserID = faculty.userID;
+    _storageController.writeFacultyUserID(facultyUserID);
   }
 
   void logOut() {
@@ -70,7 +69,8 @@ class FacultyController extends GetxController {
 
   set hidePassword(bool hidePassword) => _hidePassword.value = hidePassword;
 
-  String get facultyID => _facultyID.value;
+  String get facultyUserID => _facultyUserID.value;
 
-  set facultyID(String facultyID) => _facultyID.value = facultyID;
+  set facultyUserID(String facultyUserID) =>
+      _facultyUserID.value = facultyUserID;
 }

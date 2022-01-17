@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../constants/constants.dart';
 import 'label.dart';
 
@@ -18,7 +19,9 @@ class InputField extends StatelessWidget {
     this.maxLength,
     this.maxLines = 1,
     this.onFieldSubmitted,
+    this.inputFormatters,
     this.onChanged,
+    this.readOnly = false,
     this.textInputType = TextInputType.text,
     this.textInputAction = TextInputAction.next,
     this.textCapitalization = TextCapitalization.words,
@@ -37,8 +40,10 @@ class InputField extends StatelessWidget {
   final Widget? suffix;
   final Widget? suffixIcon;
   final bool obscureText;
+  final bool readOnly;
   final int? maxLength;
   final int? maxLines;
+  final List<TextInputFormatter>? inputFormatters;
   final void Function(String)? onFieldSubmitted;
   final void Function(String)? onChanged;
 
@@ -80,6 +85,8 @@ class InputField extends StatelessWidget {
             keyboardType: textInputType,
             textInputAction: textInputAction,
             textCapitalization: textCapitalization,
+            inputFormatters: inputFormatters,
+            readOnly: readOnly,
           ),
         ],
       ),

@@ -5,3 +5,4 @@ export 'numeric_constants.dart';
 export 'enums.dart';
 export 'extensions.dart';
 export 'string_constants.dart';
+export 'text_formatters.dart';

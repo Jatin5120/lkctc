@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -23,12 +25,11 @@ class ClassView extends GetView<FacultyController> {
           return const Center(child: Label('No Data'));
         }
 
-        FacultyModal facultyModal =
-            snapshot.data!.docs.first.data()! as FacultyModal;
+        controller.faculty = snapshot.data!.docs.first.data()! as FacultyModal;
 
-        if (facultyModal.classes.isEmpty) {
+        if (controller.faculty.classes.isEmpty) {
           return FacultyNoClassView(
-            name: facultyModal.name,
+            name: controller.faculty.name,
           );
         }
 

@@ -124,12 +124,10 @@ class AdminService {
       final FacultyModal faculty = facultySnapshot.data() as FacultyModal;
 
       if (facultyModal.userID == faculty.userID) {
-        await _facultyCollection.doc(facultyReference.id).set(
-              facultyModal.copyWith(
-                isVerified: true,
-                facultyID: facultyReference.id,
-              ),
-            );
+        await _facultyCollection
+            .doc(facultyReference.id)
+            .update({'facultyID': facultyReference.id});
+
         await _pendingCollection.doc(facultyModal.facultyID).delete();
 
         DialogService.showToast('Faculty Verified');
@@ -168,8 +166,7 @@ class AdminService {
       DocumentReference noticeReference =
           await _noticeCollection.add(noticeModal);
 
-      await noticeReference
-          .set(noticeModal.copyWith(noticeID: noticeReference.id));
+      await noticeReference.update({'noticeID': noticeReference.id});
 
       DialogService.closeDialog();
       return true;

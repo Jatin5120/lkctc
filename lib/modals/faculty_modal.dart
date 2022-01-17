@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 class FacultyModal {
   final String userID;
   final String facultyID;
+  final String classID;
   final String name;
   final String email;
   final String phone;
@@ -17,6 +18,7 @@ class FacultyModal {
   const FacultyModal({
     required this.userID,
     required this.facultyID,
+    required this.classID,
     required this.name,
     required this.email,
     required this.phone,
@@ -30,6 +32,7 @@ class FacultyModal {
   FacultyModal copyWith({
     String? userID,
     String? facultyID,
+    String? classID,
     String? name,
     String? email,
     String? phone,
@@ -42,6 +45,7 @@ class FacultyModal {
     return FacultyModal(
       userID: userID ?? this.userID,
       facultyID: facultyID ?? this.facultyID,
+      classID: classID ?? this.classID,
       name: name ?? this.name,
       email: email ?? this.email,
       phone: phone ?? this.phone,
@@ -57,6 +61,7 @@ class FacultyModal {
     return {
       'userID': userID,
       'facultyID': facultyID,
+      'classID': classID,
       'name': name,
       'email': email,
       'phone': phone,
@@ -72,6 +77,7 @@ class FacultyModal {
     return const FacultyModal(
       userID: '',
       facultyID: '',
+      classID: '',
       name: '',
       email: '',
       phone: '',
@@ -87,6 +93,7 @@ class FacultyModal {
     return FacultyModal(
       userID: map['userID'] ?? '',
       facultyID: map['facultyID'] ?? '',
+      classID: map['classID'] ?? '',
       name: map['name'] ?? '',
       email: map['email'] ?? '',
       phone: map['phone'] ?? '',
@@ -105,7 +112,7 @@ class FacultyModal {
 
   @override
   String toString() {
-    return 'FacultyModal(userID: $userID, facultyID: $facultyID, name: $name, email: $email, phone: $phone, password: $password, department: $department, designation: $designation, isVerified: $isVerified, classes: $classes)';
+    return 'FacultyModal(userID: $userID, facultyID: $facultyID, classID: $classID, name: $name, email: $email, phone: $phone, password: $password, department: $department, designation: $designation, isVerified: $isVerified, classes: $classes)';
   }
 
   @override
@@ -115,6 +122,7 @@ class FacultyModal {
     return other is FacultyModal &&
         other.userID == userID &&
         other.facultyID == facultyID &&
+        other.classID == classID &&
         other.name == name &&
         other.email == email &&
         other.phone == phone &&
@@ -129,6 +137,7 @@ class FacultyModal {
   int get hashCode {
     return userID.hashCode ^
         facultyID.hashCode ^
+        classID.hashCode ^
         name.hashCode ^
         email.hashCode ^
         phone.hashCode ^

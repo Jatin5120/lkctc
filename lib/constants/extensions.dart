@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/string_extensions.dart';
 import 'package:intl/intl.dart';
 import 'package:lkctc_student_app/constants/constants.dart';
 
@@ -118,5 +119,16 @@ extension GetThemeMode on String {
       default:
         return ThemeMode.system;
     }
+  }
+
+  String get ordinalSuffix {
+    if (isNumericOnly) {
+      if (this == '0') return '';
+      if (this == '1') return 'st';
+      if (this == '2') return 'nd';
+      if (this == '3') return 'rd';
+      return 'th';
+    }
+    return '';
   }
 }

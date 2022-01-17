@@ -2,7 +2,6 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
-import 'package:lkctc_student_app/controllers/controllers.dart';
 import 'package:lkctc_student_app/faculty/faculty.dart';
 import 'package:lkctc_student_app/routes/faculty_routes.dart';
 
@@ -19,28 +18,38 @@ abstract class FacultyService {
       FirebaseFirestore.instance;
 
   static final FacultyController _facultyController = Get.find();
-  static final StorageController _storageController = Get.find();
 
   // ---------------------- Firebase references ----------------------
 
-  static final CollectionReference _pendingCollection = _firebaseFirestore
-      .collection(kPendingCollection)
-      .withConverter<FacultyModal>(
-        fromFirestore: (snapshot, _) => FacultyModal.fromMap(snapshot.data()!),
-        toFirestore: (facultyModal, _) => facultyModal.toMap(),
-      );
+  static final CollectionReference<FacultyModal> _pendingCollection =
+      _firebaseFirestore
+          .collection(kPendingCollection)
+          .withConverter<FacultyModal>(
+            fromFirestore: (snapshot, _) =>
+                FacultyModal.fromMap(snapshot.data()!),
+            toFirestore: (facultyModal, _) => facultyModal.toMap(),
+          );
 
-  static final CollectionReference _facultyCollection = _firebaseFirestore
-      .collection(kFacultyCollection)
-      .withConverter<FacultyModal>(
-        fromFirestore: (snapshot, _) => FacultyModal.fromMap(snapshot.data()!),
-        toFirestore: (facultyModal, _) => facultyModal.toMap(),
-      );
+  static final CollectionReference<FacultyModal> _facultyCollection =
+      _firebaseFirestore
+          .collection(kFacultyCollection)
+          .withConverter<FacultyModal>(
+            fromFirestore: (snapshot, _) =>
+                FacultyModal.fromMap(snapshot.data()!),
+            toFirestore: (facultyModal, _) => facultyModal.toMap(),
+          );
+
+  static final CollectionReference<ClassModal> _classCollection =
+      _firebaseFirestore.collection(kClassCollection).withConverter<ClassModal>(
+            fromFirestore: (snapshot, _) =>
+                ClassModal.fromMap(snapshot.data()!),
+            toFirestore: (classModal, _) => classModal.toMap(),
+          );
 
   // ---------------------- Streams ----------------------
 
   static final Stream<QuerySnapshot> facultyStream = _facultyCollection
-      .where('userID', isEqualTo: _storageController.facultyID)
+      .where('userID', isEqualTo: _facultyController.facultyUserID)
       .snapshots();
 
   static final Stream<QuerySnapshot> allFacultyStream =
@@ -121,6 +130,39 @@ abstract class FacultyService {
         'An unknown error occured while registering, try again after some time',
       );
       log("Add faculty Error --> ${e.toString()}\n$st");
+      return false;
+    } finally {
+      DialogService.closeDialog();
+    }
+  }
+
+  static Future<dynamic> createClass(ClassModal classModal) async {
+    try {
+      DialogService.showLoadingDialog(message: 'Creating class');
+
+      final DocumentReference classReference =
+          await _classCollection.add(classModal);
+
+      final Map<String, dynamic> classIDMap = {'classID': classReference.id};
+
+      await classReference.update(classIDMap);
+
+      await _facultyCollection.doc(_facultyController.faculty.facultyID).update(
+            classIDMap
+              ..addAll(
+                {
+                  'classes': [classReference.id]
+                },
+              ),
+          );
+
+      return true;
+    } catch (e, st) {
+      DialogService.showSnackBar(
+        'Error Creating class',
+        'An unknown error occured while creating class, try again after some time',
+      );
+      log("Creating class Error --> $e\n$st");
       return false;
     } finally {
       DialogService.closeDialog();
