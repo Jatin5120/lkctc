@@ -113,7 +113,7 @@ class _BuildSubjects extends StatelessWidget {
                 final String subjectID =
                     _facultyController.classModal.subjects[index];
                 return StreamBuilder(
-                  stream: FacultyService.getSubject(subjectID),
+                  stream: FacultyService.subjectStream(subjectID),
                   builder: (_,
                       AsyncSnapshot<DocumentSnapshot<SubjectModal>> snapshot) {
                     if (!snapshot.hasData) {

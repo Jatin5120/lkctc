@@ -68,10 +68,17 @@ abstract class FacultyService {
   static final Stream<DocumentSnapshot<ClassModal>> classStream =
       _classCollection.doc(_facultyController.faculty.classID).snapshots();
 
+  static Stream<DocumentSnapshot<SubjectModal>> subjectStream(
+          String subjectID) =>
+      _subjectCollection.doc(subjectID).get().asStream();
+
   // ---------------------- Get Methods ----------------------
 
-  static Stream<DocumentSnapshot<SubjectModal>> getSubject(String subjectID) =>
-      _subjectCollection.doc(subjectID).get().asStream();
+  static Future<FacultyModal> getFaculty(String facultyID) async {
+    final DocumentSnapshot<FacultyModal> faculty =
+        await _facultyCollection.doc(facultyID).get();
+    return faculty.data()!;
+  }
 
   // ---------------------- Methods ----------------------
 
