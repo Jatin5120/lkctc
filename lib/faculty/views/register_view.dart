@@ -151,6 +151,7 @@ class FacultyRegisterView extends GetView<FacultyController> {
                         designation: _designation,
                         isVerified: false,
                         classes: [],
+                        subjects: [],
                       );
                       final bool registered =
                           await FacultyService.registerFaculty(facultyModal);

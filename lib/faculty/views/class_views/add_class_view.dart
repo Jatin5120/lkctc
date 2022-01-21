@@ -34,8 +34,6 @@ class _FacultyAddClassViewState extends State<FacultyAddClassView> {
         ' ' +
         (semesterValue ?? '') +
         (semesterValue ?? '').ordinalSuffix;
-
-    // setState(() {});
   }
 
   void _createClass() async {
@@ -60,6 +58,7 @@ class _FacultyAddClassViewState extends State<FacultyAddClassView> {
             department: departmentValue!,
             semester: semesterValue!,
             name: _nameController.text,
+            faculties: [],
             subjects: [],
             students: [],
             classRepresentatives: [],
@@ -86,83 +85,58 @@ class _FacultyAddClassViewState extends State<FacultyAddClassView> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: appBar('Add New Class'),
-      body: StreamBuilder<QuerySnapshot>(
-        stream: FacultyService.allFacultyStream,
-        builder: (_, snapshot) {
-          if (!snapshot.hasData) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          if (snapshot.data!.docs.isEmpty) {
-            DialogService.showErrorDialog(title: "Can't create Class");
-            return Center(
-              child: Label(
-                'Unable to Create class at the moment',
-                style: Get.textTheme.headline6,
+      appBar: const MyAppBar(title: 'Add New Class'),
+      body: Padding(
+        padding: kScaffoldPadding,
+        child: Form(
+          key: _formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              DropDown<String>(
+                label: 'Department',
+                items: kDepartments,
+                value: departmentValue,
+                onChanged: (value) {
+                  departmentValue = value;
+                  _setClassName();
+                },
               ),
-            );
-          }
-
-          return Padding(
-            padding: kScaffoldPadding,
-            child: Form(
-              key: _formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  DropDown<String>(
-                    label: 'Department',
-                    items: kDepartments,
-                    value: departmentValue,
-                    onChanged: (value) {
-                      departmentValue = value;
-                      _setClassName();
-                    },
+              DropDown<String>(
+                label: 'Semester',
+                items: kSemesters,
+                value: semesterValue,
+                onChanged: (value) {
+                  semesterValue = value;
+                  _setClassName();
+                },
+              ),
+              InputField(
+                label: 'Class Name',
+                controller: _nameController,
+                textInputAction: TextInputAction.done,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return '*Required';
+                  }
+                  return null;
+                },
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(
+                    RegExp(r'[A-Za-z0-9]+|\s'),
                   ),
-                  DropDown<String>(
-                    label: 'Semester',
-                    items: kSemesters,
-                    value: semesterValue,
-                    onChanged: (value) {
-                      semesterValue = value;
-                      _setClassName();
-                    },
-                  ),
-                  InputField(
-                    label: 'Class Name',
-                    controller: _nameController,
-                    textInputAction: TextInputAction.done,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return '*Required';
-                      }
-                      return null;
-                    },
-                    inputFormatters: [
-                      FilteringTextInputFormatter.allow(
-                        RegExp(r'[A-Za-z0-9]+|\s'),
-                      ),
-                    ],
-                  ),
-                  // _AddSubject(
-                  //   teachers: teachers,
-                  // ),
-                  // const _SubjectsList(),
-                  // const SizedBox(height: 40),
-                  const Spacer(),
-                  Button(
-                    label: 'Create Class',
-                    buttonSize: ButtonSize.large,
-                    onTap: _createClass,
-                  ),
-                  const SizedBox(height: 24),
                 ],
               ),
-            ),
-          );
-        },
+              const Spacer(),
+              Button(
+                label: 'Create Class',
+                buttonSize: ButtonSize.large,
+                onTap: _createClass,
+              ),
+              const SizedBox(height: 24),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -252,36 +226,6 @@ class _AddSubjectState extends State<_AddSubject> {
             label: 'Add Subject',
             onTap: _addSubject,
           ),
-        ],
-      ),
-    );
-  }
-}
-
-class _SubjectsList extends StatelessWidget {
-  const _SubjectsList({Key? key}) : super(key: key);
-
-  static final FacultyController _facultyController = Get.find();
-
-  @override
-  Widget build(BuildContext context) {
-    return Obx(
-      () => Column(
-        children: [
-          for (SubjectModal subjectModal in _facultyController.subjects) ...[
-            ListTile(
-              title: Label(subjectModal.name),
-              trailing: IconButton(
-                icon: GetBuilder<ThemeController>(builder: (theme) {
-                  return Icon(
-                    Icons.close_rounded,
-                    color: theme.isDarkMode ? kWhiteColor : kBlackColor,
-                  );
-                }),
-                onPressed: () {},
-              ),
-            )
-          ],
         ],
       ),
     );

@@ -5,9 +5,15 @@ import 'package:get_storage/get_storage.dart';
 
 class ThemeController extends GetxController {
   static const String _themeModeKey = 'themeMode';
+
+  late GetStorage _storage;
+
   final Rx<ThemeMode> _themeMode = Rx<ThemeMode>(ThemeMode.system);
   final RxBool _isDarkMode = false.obs;
-  late GetStorage _storage;
+  final RxInt _colorIndex = 0.obs;
+
+  int get colorIndex => _colorIndex.value;
+  set colorIndex(int colorIndex) => _colorIndex.value = colorIndex;
 
   bool get isDarkMode => _isDarkMode.value;
   set isDarkMode(bool isDarkMode) => _isDarkMode.value = isDarkMode;

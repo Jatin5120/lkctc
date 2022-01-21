@@ -65,7 +65,7 @@ class SettingsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar('Settings'),
+      appBar: const MyAppBar(title: 'Settings'),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Padding(

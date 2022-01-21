@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:lkctc_student_app/faculty/views/subject_views/all_subjects_view.dart';
 
 import 'routes.dart';
 import '../bindings/bindings.dart';
@@ -62,6 +63,14 @@ abstract class AppPages {
     GetPage(
       name: FacultyRoutes.addClass,
       page: () => const FacultyAddClassView(),
+    ),
+    GetPage(
+      name: FacultyRoutes.addSubject,
+      page: () => const AddSubjectView(),
+    ),
+    GetPage(
+      name: FacultyRoutes.allSubjects,
+      page: () => const AllSubjectsView(),
     ),
     GetPage(
       name: StudentRoutes.login,

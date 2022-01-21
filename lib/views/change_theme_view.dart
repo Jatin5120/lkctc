@@ -18,7 +18,7 @@ class ChangeThemeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar('Change Theme'),
+      appBar: const MyAppBar(title: 'Change Theme'),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(

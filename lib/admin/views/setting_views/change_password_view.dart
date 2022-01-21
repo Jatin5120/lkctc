@@ -38,7 +38,7 @@ class AdminChangePasswordView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar('Change Password'),
+      appBar: const MyAppBar(title: 'Change Password'),
       body: StreamBuilder<DocumentSnapshot>(
           stream: AdminService.adminStream,
           builder: (context, snapshot) {

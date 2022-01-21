@@ -38,6 +38,7 @@ class Button extends StatelessWidget {
     required this.onTap,
     this.buttonColor,
     this.labelColor,
+    this.icon,
     this.buttonSize = ButtonSize.medium,
   })  : buttonType = ButtonType.primary,
         super(key: key);
@@ -76,6 +77,7 @@ class Button extends StatelessWidget {
     required this.onTap,
     this.labelColor,
     this.buttonColor,
+    this.icon,
     this.buttonSize = ButtonSize.medium,
   })  : buttonType = ButtonType.secondary,
         super(key: key);
@@ -114,6 +116,7 @@ class Button extends StatelessWidget {
     required this.onTap,
     this.labelColor,
     this.buttonColor,
+    this.icon,
     this.buttonSize = ButtonSize.medium,
   })  : buttonType = ButtonType.outlined,
         super(key: key);
@@ -135,6 +138,7 @@ class Button extends StatelessWidget {
   final Color? buttonColor;
   final Color? labelColor;
   final ButtonType buttonType;
+  final IconData? icon;
 
   @override
   Widget build(BuildContext context) {
@@ -193,142 +197,246 @@ class Button extends StatelessWidget {
     ///[Button.secondary] - for [SecondaryButton], set [ButtonType] to [ButtonType.secondary]
     ///[Button.outlined] - for [OutlinedButton], set [ButtonType] to [ButtonType.outlined]
 
-    switch (buttonType) {
-      case ButtonType.primary:
-        const Color _buttonColor = kPrimaryColor;
-        const Color _lableColor = kTextColorDark;
-        Widget button = ElevatedButton(
-          onPressed: onTap,
-          child: Text(
-            label,
-            style: Get.textTheme.button!.copyWith(
-              color: labelColor ?? _lableColor,
-              fontSize: fontSize,
+    if (icon == null) {
+      switch (buttonType) {
+        case ButtonType.primary:
+          const Color _buttonColor = kPrimaryColor;
+          const Color _lableColor = kTextColorDark;
+          Widget button = ElevatedButton(
+            onPressed: onTap,
+            child: Text(
+              label,
+              style: Get.textTheme.button!.copyWith(
+                color: labelColor ?? _lableColor,
+                fontSize: fontSize,
+              ),
             ),
-          ),
-          style: ElevatedButton.styleFrom(
-            primary: buttonColor ?? _buttonColor,
-            padding: padding,
-            shape: border,
-          ),
-        );
-        if (width != null) {
-          return SizedBox(
-            width: width,
-            child: button,
+            style: ElevatedButton.styleFrom(
+              primary: buttonColor ?? _buttonColor,
+              padding: padding,
+              shape: border,
+            ),
           );
-        }
-        return button;
-
-      case ButtonType.secondary:
-        return Obx(
-          () {
-            final Color _buttonColor = themeController.isDarkMode
-                ? kSecondaryColorDark
-                : kSecondaryColorLight;
-            final Color _labelColor =
-                themeController.isDarkMode ? kTextColorDark : kPrimaryColor;
-            Widget button = ElevatedButton(
-              onPressed: onTap,
-              child: Text(
-                label,
-                style: Get.textTheme.button!.copyWith(
-                  color: labelColor ?? _labelColor,
-                  fontSize: fontSize,
-                ),
-              ),
-              style: ElevatedButton.styleFrom(
-                primary: buttonColor ?? _buttonColor,
-                padding: padding,
-                shape: border,
-              ),
+          if (width != null) {
+            return SizedBox(
+              width: width,
+              child: button,
             );
-            if (width != null) {
-              return SizedBox(
-                width: width,
-                child: button,
-              );
-            }
-            return button;
-          },
-        );
+          }
+          return button;
 
-      case ButtonType.outlined:
-        return Obx(
-          () {
-            final Color _buttonColor = themeController.isDarkMode
-                ? kBackgroundColorDark
-                : kBackgroundColorLight;
-            final Color _labelColor =
-                themeController.isDarkMode ? kTextColorDark : kPrimaryColor;
-
-            Widget button = OutlinedButton(
-              onPressed: onTap,
-              child: Text(label),
-              style: ButtonStyle(
-                padding: MaterialStateProperty.resolveWith((states) => padding),
-                shape: MaterialStateProperty.resolveWith((states) => border),
-                textStyle: MaterialStateProperty.resolveWith(
-                  (state) => Get.textTheme.button!.copyWith(fontSize: fontSize),
-                ),
-                side: MaterialStateProperty.resolveWith(
-                  (states) => BorderSide(
-                    width: outlineWidth,
-                    color: buttonColor ?? _labelColor,
+        case ButtonType.secondary:
+          return Obx(
+            () {
+              final Color _buttonColor = themeController.isDarkMode
+                  ? kSecondaryColorDark
+                  : kSecondaryColorLight;
+              final Color _labelColor =
+                  themeController.isDarkMode ? kTextColorDark : kPrimaryColor;
+              Widget button = ElevatedButton(
+                onPressed: onTap,
+                child: Text(
+                  label,
+                  style: Get.textTheme.button!.copyWith(
+                    color: labelColor ?? _labelColor,
+                    fontSize: fontSize,
                   ),
                 ),
-                overlayColor: MaterialStateProperty.resolveWith(
-                    (Set<MaterialState> buttonStates) {
-                  if (buttonStates.contains(MaterialState.pressed)) {
-                    return buttonColor ?? _labelColor;
-                  }
-                  return buttonColor ?? _buttonColor;
-                }),
-                foregroundColor: MaterialStateProperty.resolveWith(
-                    (Set<MaterialState> buttonStates) {
-                  if (buttonStates.contains(MaterialState.pressed)) {
-                    return _buttonColor;
-                  }
-                  return labelColor ?? _labelColor;
-                }),
-              ),
-            );
-
-            if (width != null) {
-              return SizedBox(
-                width: width,
-                child: button,
+                style: ElevatedButton.styleFrom(
+                  primary: buttonColor ?? _buttonColor,
+                  padding: padding,
+                  shape: border,
+                ),
               );
-            }
-            return button;
-          },
-        );
-
-      default:
-        const Color _buttonColor = kPrimaryColor;
-        const Color _lableColor = kTextColorDark;
-        Widget button = ElevatedButton(
-          onPressed: onTap,
-          child: Text(
-            label,
-            style: Get.textTheme.button!.copyWith(
-              color: labelColor ?? _lableColor,
-              fontSize: fontSize,
-            ),
-          ),
-          style: ElevatedButton.styleFrom(
-            primary: buttonColor ?? _buttonColor,
-            padding: padding,
-            shape: border,
-          ),
-        );
-        if (width != null) {
-          return SizedBox(
-            width: width,
-            child: button,
+              if (width != null) {
+                return SizedBox(
+                  width: width,
+                  child: button,
+                );
+              }
+              return button;
+            },
           );
-        }
-        return button;
+
+        case ButtonType.outlined:
+          return Obx(
+            () {
+              final Color _buttonColor = themeController.isDarkMode
+                  ? kBackgroundColorDark
+                  : kBackgroundColorLight;
+              final Color _labelColor =
+                  themeController.isDarkMode ? kTextColorDark : kPrimaryColor;
+
+              Widget button = OutlinedButton(
+                onPressed: onTap,
+                child: Text(label),
+                style: ButtonStyle(
+                  padding:
+                      MaterialStateProperty.resolveWith((states) => padding),
+                  shape: MaterialStateProperty.resolveWith((states) => border),
+                  textStyle: MaterialStateProperty.resolveWith(
+                    (state) =>
+                        Get.textTheme.button!.copyWith(fontSize: fontSize),
+                  ),
+                  side: MaterialStateProperty.resolveWith(
+                    (states) => BorderSide(
+                      width: outlineWidth,
+                      color: buttonColor ?? _labelColor,
+                    ),
+                  ),
+                  overlayColor: MaterialStateProperty.resolveWith(
+                      (Set<MaterialState> buttonStates) {
+                    if (buttonStates.contains(MaterialState.pressed)) {
+                      return buttonColor ?? _labelColor;
+                    }
+                    return buttonColor ?? _buttonColor;
+                  }),
+                  foregroundColor: MaterialStateProperty.resolveWith(
+                      (Set<MaterialState> buttonStates) {
+                    if (buttonStates.contains(MaterialState.pressed)) {
+                      return _buttonColor;
+                    }
+                    return labelColor ?? _labelColor;
+                  }),
+                ),
+              );
+
+              if (width != null) {
+                return SizedBox(
+                  width: width,
+                  child: button,
+                );
+              }
+              return button;
+            },
+          );
+      }
+    }
+
+    /// In this condition the buttons will be shown with an [icon]
+    else {
+      switch (buttonType) {
+        case ButtonType.primary:
+          const Color _buttonColor = kPrimaryColor;
+          const Color _lableColor = kTextColorDark;
+          Widget button = ElevatedButton.icon(
+            onPressed: onTap,
+            icon: Icon(
+              icon,
+              color: labelColor ?? _lableColor,
+            ),
+            label: Text(
+              label,
+              style: Get.textTheme.button!.copyWith(
+                color: labelColor ?? _lableColor,
+                fontSize: fontSize,
+              ),
+            ),
+            style: ElevatedButton.styleFrom(
+              primary: buttonColor ?? _buttonColor,
+              padding: padding,
+              shape: border,
+            ),
+          );
+          if (width != null) {
+            return SizedBox(
+              width: width,
+              child: button,
+            );
+          }
+          return button;
+
+        case ButtonType.secondary:
+          return Obx(
+            () {
+              final Color _buttonColor = themeController.isDarkMode
+                  ? kSecondaryColorDark
+                  : kSecondaryColorLight;
+              final Color _labelColor =
+                  themeController.isDarkMode ? kTextColorDark : kPrimaryColor;
+              Widget button = ElevatedButton.icon(
+                onPressed: onTap,
+                icon: Icon(
+                  icon,
+                  color: labelColor ?? _labelColor,
+                ),
+                label: Text(
+                  label,
+                  style: Get.textTheme.button!.copyWith(
+                    color: labelColor ?? _labelColor,
+                    fontSize: fontSize,
+                  ),
+                ),
+                style: ElevatedButton.styleFrom(
+                  primary: buttonColor ?? _buttonColor,
+                  padding: padding,
+                  shape: border,
+                ),
+              );
+              if (width != null) {
+                return SizedBox(
+                  width: width,
+                  child: button,
+                );
+              }
+              return button;
+            },
+          );
+
+        case ButtonType.outlined:
+          return Obx(
+            () {
+              final Color _buttonColor = themeController.isDarkMode
+                  ? kBackgroundColorDark
+                  : kBackgroundColorLight;
+              final Color _labelColor =
+                  themeController.isDarkMode ? kTextColorDark : kPrimaryColor;
+
+              Widget button = OutlinedButton.icon(
+                onPressed: onTap,
+                icon: Icon(icon),
+                label: Text(label),
+                style: ButtonStyle(
+                  padding:
+                      MaterialStateProperty.resolveWith((states) => padding),
+                  shape: MaterialStateProperty.resolveWith((states) => border),
+                  textStyle: MaterialStateProperty.resolveWith(
+                    (state) =>
+                        Get.textTheme.button!.copyWith(fontSize: fontSize),
+                  ),
+                  side: MaterialStateProperty.resolveWith(
+                    (states) => BorderSide(
+                      width: outlineWidth,
+                      color: buttonColor ?? _labelColor,
+                    ),
+                  ),
+                  overlayColor: MaterialStateProperty.resolveWith(
+                      (Set<MaterialState> buttonStates) {
+                    if (buttonStates.contains(MaterialState.pressed)) {
+                      return buttonColor ?? _labelColor;
+                    }
+                    return buttonColor ?? _buttonColor;
+                  }),
+                  foregroundColor: MaterialStateProperty.resolveWith(
+                      (Set<MaterialState> buttonStates) {
+                    if (buttonStates.contains(MaterialState.pressed)) {
+                      return _buttonColor;
+                    }
+                    return labelColor ?? _labelColor;
+                  }),
+                ),
+              );
+
+              if (width != null) {
+                return SizedBox(
+                  width: width,
+                  child: button,
+                );
+              }
+              return button;
+            },
+          );
+      }
     }
   }
 }

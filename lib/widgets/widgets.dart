@@ -7,3 +7,4 @@ export 'label.dart';
 export 'drop_down.dart';
 export 'app_bar.dart';
 export 'back_handler.dart';
+export 'tab_bar.dart';

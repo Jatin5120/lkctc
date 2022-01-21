@@ -18,6 +18,19 @@ ThemeData kLightTheme = ThemeData(
     iconTheme: IconThemeData(
       color: kBlackColor,
     ),
+    elevation: 0,
+    centerTitle: true,
+    backgroundColor: kTransparentColor,
+  ),
+  tabBarTheme: TabBarTheme(
+    indicator: const BoxDecoration(
+      color: kPrimaryColor,
+      borderRadius: kTabBarRadius,
+    ),
+    labelColor: kTextColorDark,
+    unselectedLabelColor: kCaptionColorLight,
+    labelStyle: Get.textTheme.subtitle1,
+    unselectedLabelStyle: Get.textTheme.subtitle1,
   ),
   textTheme: kTextTheme,
   floatingActionButtonTheme: const FloatingActionButtonThemeData(
@@ -96,6 +109,19 @@ ThemeData kDarkTheme = ThemeData(
     iconTheme: IconThemeData(
       color: kWhiteColor,
     ),
+    elevation: 0,
+    centerTitle: true,
+    backgroundColor: kTransparentColor,
+  ),
+  tabBarTheme: TabBarTheme(
+    indicator: const BoxDecoration(
+      color: kWhiteColor,
+      borderRadius: kTabBarRadius,
+    ),
+    labelColor: kTextColorLight,
+    unselectedLabelColor: kCaptionColorDark,
+    labelStyle: Get.textTheme.subtitle1,
+    unselectedLabelStyle: Get.textTheme.subtitle1,
   ),
   textTheme: kTextTheme,
   floatingActionButtonTheme: const FloatingActionButtonThemeData(

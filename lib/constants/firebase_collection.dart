@@ -9,6 +9,7 @@ const String kFacultyCollection = 'faculty';
 const String kNoticesCollection = 'notices';
 const String kPendingCollection = 'pending';
 const String kStudentCollection = 'student';
+const String kSubjectCollection = 'subject';
 
 const String kEventsFilePath = '/events';
 const String kNoticesFilePath = '/notices';

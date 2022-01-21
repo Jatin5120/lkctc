@@ -8,6 +8,9 @@ const BorderRadius kSmallRadius = BorderRadius.all(Radius.circular(8));
 const BorderRadius kMediumRadius = BorderRadius.all(Radius.circular(12));
 const BorderRadius kLargeRadius = BorderRadius.all(Radius.circular(16));
 
+const double kTabBarHeight = 48;
+const BorderRadius kTabBarRadius = BorderRadius.all(Radius.circular(24));
+
 const RoundedRectangleBorder kSmallBorder =
     RoundedRectangleBorder(borderRadius: kSmallRadius);
 const RoundedRectangleBorder kMediumBorder =

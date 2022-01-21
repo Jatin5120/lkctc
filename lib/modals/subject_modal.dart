@@ -7,6 +7,7 @@ class SubjectModal {
   final String name;
   final String subjectCode;
   final String department;
+  final String link;
   final int colorIndex;
 
   const SubjectModal({
@@ -16,6 +17,7 @@ class SubjectModal {
     required this.name,
     required this.subjectCode,
     required this.department,
+    required this.link,
     required this.colorIndex,
   });
 
@@ -26,6 +28,7 @@ class SubjectModal {
     String? name,
     String? subjectCode,
     String? department,
+    String? link,
     int? colorIndex,
   }) {
     return SubjectModal(
@@ -35,6 +38,7 @@ class SubjectModal {
       name: name ?? this.name,
       subjectCode: subjectCode ?? this.subjectCode,
       department: department ?? this.department,
+      link: link ?? this.link,
       colorIndex: colorIndex ?? this.colorIndex,
     );
   }
@@ -47,6 +51,7 @@ class SubjectModal {
       name: '',
       subjectCode: '',
       department: '',
+      link: '',
       colorIndex: 0,
     );
   }
@@ -59,19 +64,21 @@ class SubjectModal {
       'name': name,
       'subjectCode': subjectCode,
       'department': department,
+      'link': link,
       'colorIndex': colorIndex,
     };
   }
 
   factory SubjectModal.fromMap(Map<String, dynamic> map) {
     return SubjectModal(
-      subjectID: map['subjectID'],
-      classID: map['classID'],
-      facultyID: map['facultyID'],
-      name: map['name'],
-      subjectCode: map['subjectCode'],
-      department: map['department'],
-      colorIndex: map['colorIndex'],
+      subjectID: map['subjectID'] ?? '',
+      classID: map['classID'] ?? '',
+      facultyID: map['facultyID'] ?? '',
+      name: map['name'] ?? '',
+      subjectCode: map['subjectCode'] ?? '',
+      department: map['department'] ?? '',
+      link: map['link'] ?? '',
+      colorIndex: map['colorIndex']?.toInt() ?? 0,
     );
   }
 
@@ -82,7 +89,7 @@ class SubjectModal {
 
   @override
   String toString() {
-    return 'SubjectModal(subjectID: $subjectID, classID: $classID, facultyID: $facultyID, name: $name, subjectCode: $subjectCode, department: $department, colorIndex: $colorIndex)';
+    return 'SubjectModal(subjectID: $subjectID, classID: $classID, facultyID: $facultyID, name: $name, subjectCode: $subjectCode, department: $department, link: $link, colorIndex: $colorIndex)';
   }
 
   @override
@@ -96,6 +103,7 @@ class SubjectModal {
         other.name == name &&
         other.subjectCode == subjectCode &&
         other.department == department &&
+        other.link == link &&
         other.colorIndex == colorIndex;
   }
 
@@ -107,6 +115,7 @@ class SubjectModal {
         name.hashCode ^
         subjectCode.hashCode ^
         department.hashCode ^
+        link.hashCode ^
         colorIndex.hashCode;
   }
 }

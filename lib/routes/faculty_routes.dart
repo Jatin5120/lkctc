@@ -8,4 +8,7 @@ abstract class FacultyRoutes {
   static const String notVerified = '/facultyNotVerified';
 
   static const String addClass = "/facultyAddClass";
+  static const String addSubject = "/facultyAddSubject";
+
+  static const String allSubjects = "/facultyAllSubjects";
 }

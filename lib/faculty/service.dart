@@ -46,14 +46,32 @@ abstract class FacultyService {
             toFirestore: (classModal, _) => classModal.toMap(),
           );
 
+  static final CollectionReference<SubjectModal> _subjectCollection =
+      _firebaseFirestore
+          .collection(kSubjectCollection)
+          .withConverter<SubjectModal>(
+            fromFirestore: (snapshot, _) =>
+                SubjectModal.fromMap(snapshot.data()!),
+            toFirestore: (subjectModal, _) => subjectModal.toMap(),
+          );
+
   // ---------------------- Streams ----------------------
 
-  static final Stream<QuerySnapshot> facultyStream = _facultyCollection
-      .where('userID', isEqualTo: _facultyController.facultyUserID)
-      .snapshots();
+  static final Stream<QuerySnapshot<FacultyModal>> facultyStream =
+      _facultyCollection
+          .where('userID', isEqualTo: _facultyController.facultyUserID)
+          .snapshots();
 
-  static final Stream<QuerySnapshot> allFacultyStream =
+  static final Stream<QuerySnapshot<FacultyModal>> allFacultyStream =
       _facultyCollection.snapshots();
+
+  static final Stream<DocumentSnapshot<ClassModal>> classStream =
+      _classCollection.doc(_facultyController.faculty.classID).snapshots();
+
+  // ---------------------- Get Methods ----------------------
+
+  static Stream<DocumentSnapshot<SubjectModal>> getSubject(String subjectID) =>
+      _subjectCollection.doc(subjectID).get().asStream();
 
   // ---------------------- Methods ----------------------
 
@@ -163,6 +181,73 @@ abstract class FacultyService {
         'An unknown error occured while creating class, try again after some time',
       );
       log("Creating class Error --> $e\n$st");
+      return false;
+    } finally {
+      DialogService.closeDialog();
+    }
+  }
+
+  static Future<bool> createSubject({
+    required SubjectModal subjectModal,
+    required ClassModal classModal,
+  }) async {
+    try {
+      DialogService.showLoadingDialog(message: 'Adding subject');
+
+      /// Adding/Updating data in [Subject] collections
+      final DocumentReference<SubjectModal> subjectReference =
+          await _subjectCollection.add(subjectModal);
+
+      final Map<String, dynamic> subjectIDMap = {
+        'subjectID': subjectReference.id
+      };
+
+      await subjectReference.update(subjectIDMap);
+
+      /// Adding/Updating data in [Class] collections
+      final DocumentReference<ClassModal> classReference =
+          _classCollection.doc(classModal.classID);
+
+      await classReference.update(
+        {
+          'faculties': [
+            ...classModal.faculties,
+            subjectModal.facultyID,
+          ],
+          'subjects': [
+            ...classModal.subjects,
+            subjectReference.id,
+          ]
+        },
+      );
+
+      /// Adding/Updating data in [Faculty] collections
+      final DocumentReference<FacultyModal> facultyReference =
+          _facultyCollection.doc(subjectModal.facultyID);
+
+      final DocumentSnapshot<FacultyModal> facultySnapshot =
+          await facultyReference.get();
+
+      await facultyReference.update(
+        {
+          'classes': [
+            ...facultySnapshot.data()!.classes,
+            classModal.classID,
+          ],
+          'subjects': [
+            ...facultySnapshot.data()!.subjects,
+            subjectReference.id,
+          ]
+        },
+      );
+
+      return true;
+    } catch (e, st) {
+      DialogService.showSnackBar(
+        'Subject not Added',
+        'An unknown error occured while creating subject, try again after some time',
+      );
+      log("Creating subject Error --> $e\n$st");
       return false;
     } finally {
       DialogService.closeDialog();

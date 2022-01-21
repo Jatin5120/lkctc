@@ -13,6 +13,7 @@ class FacultyController extends GetxController {
   static final NavBarController _navBarController = Get.find();
 
   final Rx<FacultyModal> _faculty = Rx<FacultyModal>(FacultyModal.empty());
+  final Rx<ClassModal> _classModal = Rx<ClassModal>(ClassModal.empty());
 
   final RxList<SubjectModal> _subjects = RxList<SubjectModal>.empty();
 
@@ -56,6 +57,10 @@ class FacultyController extends GetxController {
   FacultyModal get faculty => _faculty.value;
 
   set faculty(FacultyModal faculty) => _faculty.value = faculty;
+
+  ClassModal get classModal => _classModal.value;
+
+  set classModal(ClassModal classModal) => _classModal.value = classModal;
 
   List<SubjectModal> get subjects => _subjects.value;
 

@@ -16,7 +16,7 @@ class VerifyAccountsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar('Verify Accounts'),
+      appBar: const MyAppBar(title: 'Verify Accounts'),
       body: StreamBuilder<QuerySnapshot>(
         stream: AdminService.pendingStream,
         builder: (_, snapshot) {

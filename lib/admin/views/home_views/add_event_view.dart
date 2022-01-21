@@ -90,7 +90,7 @@ class AddEventsView extends StatelessWidget {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: appBar('Add Event'),
+      appBar: const MyAppBar(title: 'Add Event'),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Padding(

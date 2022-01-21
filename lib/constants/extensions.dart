@@ -75,6 +75,14 @@ extension TypeString on UserType {
   }
 }
 
+extension ShortName on String {
+  String get shortDesignation =>
+      split(' ').map((e) => e.substring(0, 4)).toList().join(' ');
+
+  String get shortSubjectName =>
+      split(' ').map((e) => e.substring(0, 1)).toList().join();
+}
+
 extension FileName on DateTime {
   String get fileName => toString()
       .split('.')

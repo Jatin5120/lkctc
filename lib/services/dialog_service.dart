@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:lkctc_student_app/constants/constants.dart';
+import 'package:lkctc_student_app/controllers/controllers.dart';
 import 'package:lkctc_student_app/widgets/widgets.dart';
 
 class DialogService {
   const DialogService._();
+
+  static final ThemeController _themeController = Get.find();
 
   /// This method shows a [Loading dialog] as an [Overlay] on the screen
   ///
@@ -224,6 +227,72 @@ class DialogService {
         ),
       ),
       barrierDismissible: false,
+    );
+  }
+
+  static Future<void> showColorDialog() async {
+    int colorIndex = _themeController.colorIndex;
+    await Get.dialog(
+      SizedBox(
+        child: AlertDialog(
+          title: Text('Select Color', style: Get.textTheme.headline6),
+          insetPadding: EdgeInsets.symmetric(
+            horizontal: Get.size.width.tenPercent,
+            vertical: Get.size.height.twentyPercent,
+          ),
+          contentPadding: const EdgeInsets.symmetric(vertical: 16),
+          content: SizedBox(
+            height: double.maxFinite,
+            width: double.maxFinite,
+            child: GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 4,
+                childAspectRatio: 1,
+                crossAxisSpacing: 8.0,
+                mainAxisSpacing: 8.0,
+              ),
+              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
+              physics: const BouncingScrollPhysics(),
+              scrollDirection: Axis.horizontal,
+              itemCount: kSubjectColors.length,
+              itemBuilder: (_, index) => GestureDetector(
+                onTap: () {
+                  _themeController.colorIndex = index;
+                },
+                child: Obx(
+                  () => Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: kSubjectColors[index],
+                    ),
+                    child: _themeController.colorIndex == index
+                        ? const Icon(
+                            Icons.check,
+                            color: Colors.white,
+                          )
+                        : null,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          actions: [
+            Button.secondary(
+              label: 'Cancel',
+              buttonSize: ButtonSize.small,
+              onTap: () {
+                _themeController.colorIndex = colorIndex;
+                closeDialog();
+              },
+            ),
+            const Button(
+              label: 'Select',
+              buttonSize: ButtonSize.small,
+              onTap: closeDialog,
+            ),
+          ],
+        ),
+      ),
     );
   }
 

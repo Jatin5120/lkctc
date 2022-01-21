@@ -14,6 +14,7 @@ class FacultyModal {
   final String designation;
   final bool isVerified;
   final List<String> classes;
+  final List<String> subjects;
 
   const FacultyModal({
     required this.userID,
@@ -27,6 +28,7 @@ class FacultyModal {
     required this.designation,
     required this.isVerified,
     required this.classes,
+    required this.subjects,
   });
 
   FacultyModal copyWith({
@@ -41,6 +43,7 @@ class FacultyModal {
     String? designation,
     bool? isVerified,
     List<String>? classes,
+    List<String>? subjects,
   }) {
     return FacultyModal(
       userID: userID ?? this.userID,
@@ -54,6 +57,7 @@ class FacultyModal {
       designation: designation ?? this.designation,
       isVerified: isVerified ?? this.isVerified,
       classes: classes ?? this.classes,
+      subjects: subjects ?? this.subjects,
     );
   }
 
@@ -70,6 +74,7 @@ class FacultyModal {
       'designation': designation,
       'isVerified': isVerified,
       'classes': classes,
+      'subjects': subjects,
     };
   }
 
@@ -86,6 +91,7 @@ class FacultyModal {
       designation: '',
       isVerified: false,
       classes: [],
+      subjects: [],
     );
   }
 
@@ -102,6 +108,7 @@ class FacultyModal {
       designation: map['designation'] ?? '',
       isVerified: map['isVerified'] ?? false,
       classes: List<String>.from(map['classes']),
+      subjects: List<String>.from(map['subjects']),
     );
   }
 
@@ -112,7 +119,7 @@ class FacultyModal {
 
   @override
   String toString() {
-    return 'FacultyModal(userID: $userID, facultyID: $facultyID, classID: $classID, name: $name, email: $email, phone: $phone, password: $password, department: $department, designation: $designation, isVerified: $isVerified, classes: $classes)';
+    return 'FacultyModal(userID: $userID, facultyID: $facultyID, classID: $classID, name: $name, email: $email, phone: $phone, password: $password, department: $department, designation: $designation, isVerified: $isVerified, classes: $classes, subjects: $subjects)';
   }
 
   @override
@@ -130,7 +137,8 @@ class FacultyModal {
         other.department == department &&
         other.designation == designation &&
         other.isVerified == isVerified &&
-        listEquals(other.classes, classes);
+        listEquals(other.classes, classes) &&
+        listEquals(other.subjects, subjects);
   }
 
   @override
@@ -145,6 +153,7 @@ class FacultyModal {
         department.hashCode ^
         designation.hashCode ^
         isVerified.hashCode ^
-        classes.hashCode;
+        classes.hashCode ^
+        subjects.hashCode;
   }
 }
