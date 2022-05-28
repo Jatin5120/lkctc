@@ -41,8 +41,7 @@ class ThemeController extends GetxController {
         isDarkMode = true;
         break;
       case ThemeMode.system:
-        Brightness brightness =
-            SchedulerBinding.instance!.window.platformBrightness;
+        Brightness brightness = SchedulerBinding.instance.window.platformBrightness;
         isDarkMode = brightness == Brightness.dark;
         break;
       default:

@@ -31,7 +31,9 @@ class AdminController extends GetxController {
     _storageController.writeUserType(UserType.admin.type);
 
     if (loggedIn) {
-      Get.offAllNamed(AdminRoutes.homeWrapper);
+      if (Get.currentRoute != AdminRoutes.homeWrapper) {
+        Get.offAllNamed(AdminRoutes.homeWrapper);
+      }
     } else {
       // Get.offAllNamed(CommonRoutes.auth);
       // Get.toNamed(AdminRoutes.login);

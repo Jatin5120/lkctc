@@ -51,7 +51,7 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance!.addPostFrameCallback(initializeAnimation);
+    WidgetsBinding.instance.addPostFrameCallback(initializeAnimation);
   }
 
   @override

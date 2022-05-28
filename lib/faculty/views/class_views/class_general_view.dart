@@ -154,7 +154,7 @@ class _SubjectCard extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 24.0),
           child: Text(
             subjectModal.name.shortSubjectName,
-            style: Get.textTheme.headline6,
+            style: Get.textTheme.headline6!.copyWith(color: kWhiteColor),
           ),
         ),
       ),
